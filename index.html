@@ -467,8 +467,12 @@ $$	ext{IoU} = rac{	ext{Area}(B_p \cap B_{gt})}{	ext{Area}(B_p \cup B_{gt})} = 
 <p><strong>2. Công thức tính kích thước Feature Map đầu ra:</strong></p>
 <p>Giả sử ảnh đầu vào vuông có kích thước \(W_{in} 	imes H_{in}\), kích thước đầu ra \(W_{out} 	imes H_{out}\) được tính bằng:</p>
 <div class="formula-block">
-$$W_{out} = \left\lfloor rac{W_{in} - K + 2P}{S} ightfloor + 1$$
-$$H_{out} = \left\lfloor rac{H_{in} - K + 2P}{S} ightfloor + 1$$
+$$W_{out} = \left\lfloor rac{W_{in} - K + 2P}{S} 
+ight
+floor + 1$$
+$$H_{out} = \left\lfloor rac{H_{in} - K + 2P}{S} 
+ight
+floor + 1$$
 </div>
 <p><strong>Ảnh hưởng của từng tham số:</strong></p>
 <ul>
@@ -850,7 +854,8 @@ $$\mathcal{L}_{	ext{total}} = \lambda_{	ext{cls}} \cdot \mathcal{L}_{	ext{cls}} 
 
 <p><strong>2. Công thức Toán học của BCE Loss cho 1 mẫu:</strong></p>
 <div class="formula-block">
-$$\mathcal{L}_{	ext{BCE}}(y, \hat{y}) = - \left[ y \log(\hat{y}) + (1 - y) \log(1 - \hat{y}) ight]$$
+$$\mathcal{L}_{	ext{BCE}}(y, \hat{y}) = - \left[ y \log(\hat{y}) + (1 - y) \log(1 - \hat{y}) 
+ight]$$
 </div>
 <p>Trong đó:</p>
 <ul>
@@ -881,14 +886,17 @@ abla = 0\)). Mô hình không nhận được bất kỳ tín hiệu hướng d�
 
 <p><strong>2. Công thức CIoU (Complete IoU) Loss:</strong></p>
 <div class="formula-block">
-$$\mathcal{L}_{	ext{CIoU}} = 1 - 	ext{IoU} + rac{ho^2(b, b^{gt})}{c^2} + lpha v$$
+$$\mathcal{L}_{	ext{CIoU}} = 1 - 	ext{IoU} + rac{
+ho^2(b, b^{gt})}{c^2} + lpha v$$
 </div>
 <p>Trong đó:</p>
 <ul>
     <li>\(b, b^{gt}\): Tọa độ tâm của Box dự đoán và Box ground truth.</li>
-    <li>\(ho^2(b, b^{gt})\): Bình phương khoảng cách Euclidean giữa 2 tâm box.</li>
+    <li>\(
+ho^2(b, b^{gt})\): Bình phương khoảng cách Euclidean giữa 2 tâm box.</li>
     <li>\(c\): Độ dài đường chéo của khung bao nhỏ nhất chứa cả 2 box (smallest enclosing box).</li>
-    <li>\(v = rac{4}{\pi^2} \left( rctan rac{w^{gt}}{h^{gt}} - rctan rac{w}{h} ight)^2\): Đại lượng đo sự bất đồng về tỷ lệ khung hình (aspect ratio).</li>
+    <li>\(v = rac{4}{\pi^2} \left( rctan rac{w^{gt}}{h^{gt}} - rctan rac{w}{h} 
+ight)^2\): Đại lượng đo sự bất đồng về tỷ lệ khung hình (aspect ratio).</li>
     <li>\(lpha = rac{v}{(1 - 	ext{IoU}) + v}\): Tham số điều phối trọng số của \(v\).</li>
 </ul>
 
@@ -911,7 +919,8 @@ $$\mathcal{L}_{	ext{CIoU}} = 1 - 	ext{IoU} + rac{ho^2(b, b^{gt})}{c^2} + lpha
 
 <p><strong>2. Công thức DFL:</strong></p>
 <div class="formula-block">
-$$\mathcal{L}_{	ext{DFL}}(S_i, S_{i+1}) = - \left( (y_{i+1} - y) \log(S_i) + (y - y_i) \log(S_{i+1}) ight)$$
+$$\mathcal{L}_{	ext{DFL}}(S_i, S_{i+1}) = - \left( (y_{i+1} - y) \log(S_i) + (y - y_i) \log(S_{i+1}) 
+ight)$$
 </div>
 <p>Trong đó \(y_i \le y \le y_{i+1}\) là 2 vị trí bin rời rạc gần nhất ôm lấy giá trị ground truth thực tế \(y\), và \(S_i, S_{i+1}\) là giá trị xác suất từ hàm Softmax tại các bin đó.</p>
 
@@ -3126,7 +3135,11 @@ self.density_history = self.density_history[-200:]</code></pre>
         </li>
         <li><strong>Bước 3: Tự động tính toán Mẫu số Max Capacity:</strong>
             <div class="formula-block">
-            $$	ext{max\_capacity}_{	ext{auto}} = \left\lfloor rac{S_{	ext{ROI}}}{S_{	ext{pcu}}} ightfloor = \left\lfloor rac{S_{	ext{ROI}}}{12.5} ightfloor$$
+            $$	ext{max\_capacity}_{	ext{auto}} = \left\lfloor rac{S_{	ext{ROI}}}{S_{	ext{pcu}}} 
+ight
+floor = \left\lfloor rac{S_{	ext{ROI}}}{12.5} 
+ight
+floor$$
             </div>
         </li>
     </ol>
@@ -4425,7 +4438,9 @@ $$	ext{Total PCU} = (3 	imes 0.3) + (1 	imes 1.0) + (1 	imes 2.0) = 0.9 + 1.0 + 
 <p>Nếu thêm 1 xe máy nữa (\(4 	imes 0.3 = 1.2\)):</p>
 <div class="formula-block">
 $$	ext{Total PCU} = (4 	imes 0.3) + (1 	imes 1.0) + (1 	imes 2.0) = 1.2 + 1.0 + 2.0 = 4.1 	ext{ PCU}$$
-$$	ext{Density Percent} = \left( rac{	ext{Total PCU}}{	ext{max\_capacity}} ight) 	imes 100\% = \left( rac{4.1}{10} ight) 	imes 100\% = 41.0\%$$
+$$	ext{Density Percent} = \left( rac{	ext{Total PCU}}{	ext{max\_capacity}} 
+ight) 	imes 100\% = \left( rac{4.1}{10} 
+ight) 	imes 100\% = 41.0\%$$
 </div>
 <p>Kết quả tính toán bằng tay trùng khớp 100% tuyệt đối với khẳng định trong <code>test_density.py</code>!</p>
 
